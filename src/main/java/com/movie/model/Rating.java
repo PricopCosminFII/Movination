@@ -12,5 +12,7 @@ public class Rating {
     @Column
     private Integer mark;
 
-
+    @ManyToOne
+    @JoinColumn(name="movie_id", nullable=false)
+    private Movie movie;
 }
