@@ -2,17 +2,15 @@ package com.movie.converter;
 
 import com.movie.dto.MovieDTO;
 import com.movie.model.Movie;
+import org.modelmapper.ModelMapper;
 
 public class MovieConverter {
 
+    ModelMapper modelMapper;
 
     public Movie convert(MovieDTO movieDTO) {
         if (movieDTO != null) {
-            Movie movie = new Movie();
-            movie.setName(movieDTO.getName());
-            movie.setDescription(movieDTO.getDescription());
-            movie.setPicture(movieDTO.getPicture());
-            movie.setRating(movieDTO.getRating());
+            Movie movie = modelMapper.map(movieDTO, Movie.class);
             return movie;
         }
         return null;
@@ -20,12 +18,7 @@ public class MovieConverter {
 
     public MovieDTO convert(Movie movie) {
         if (movie != null) {
-            MovieDTO movieDTO = new MovieDTO();
-            movieDTO.setName(movie.getName());
-            movieDTO.setId(movie.getId());
-            movieDTO.setDescription(movie.getDescription());
-            movieDTO.setRating(movieDTO.getRating());
-            movieDTO.setPicture(movie.getPicture());
+            MovieDTO movieDTO = modelMapper.map(movie, MovieDTO.class);
             return movieDTO;
         }
         return null;

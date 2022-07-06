@@ -2,22 +2,23 @@ package com.movie.converter;
 
 import com.movie.dto.CategoryDTO;
 import com.movie.model.Category;
+import org.modelmapper.ModelMapper;
 
 public class CategoryConverter {
-   public Category convert(CategoryDTO categoryDTO) {
+    ModelMapper modelMapper;
+
+    public Category convert(CategoryDTO categoryDTO) {
         if (categoryDTO != null) {
-            Category category = new Category();
-            category.setName(categoryDTO.getName());
+
+            Category category = modelMapper.map(categoryDTO,Category.class);
             return category;
         }
         return null;
     }
 
-   public CategoryDTO convert(Category category) {
+    public CategoryDTO convert(Category category) {
         if (category != null) {
-            CategoryDTO categoryDTO = new CategoryDTO();
-            categoryDTO.setId(category.getId());
-            categoryDTO.setName(category.getName());
+            CategoryDTO categoryDTO = modelMapper.map(category,CategoryDTO.class);
             return categoryDTO;
         }
         return null;
