@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Navbar*/
+.btn-outline-success{
+    color: #f9bc50;
+    border-color: #f9bc50;
+}
+.btn-outline-success:hover{
+    color: white;
+    background-color: #f9bc50;
+    border-color: #f9bc50;
+}
+.navbar-dark .navbar-nav .nav-link{
+    font-family: 'Anton', sans-serif;
+    color: #f9bc50;
+}
+
