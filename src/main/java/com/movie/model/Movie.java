@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,10 +13,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="movie")
+@Table(name = "movie")
 public class Movie {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -28,13 +27,14 @@ public class Movie {
 
     @Column
     private String picture;
-
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable = false)
-    private Category category;
+    @Column
+    private Integer rating;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rating> ratings = new ArrayList<>();
+    private List<Category> categories;
+
+    @OneToOne
+    private MovieWatchlist movieWatchlist;
 
     // to do something with category code - so we don't use the PK
 

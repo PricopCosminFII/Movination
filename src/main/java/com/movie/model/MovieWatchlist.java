@@ -1,29 +1,27 @@
 package com.movie.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "category")
-public class Category {
+public class MovieWatchlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Column
+    private Integer userRating;
+    @OneToOne
     private Movie movie;
-
-    // to do something with category code - so we don't use the PK
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    List<Watchlist> watchlists;
 }

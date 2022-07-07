@@ -2,4 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--- Converters -->
+    <bean id="movieConvertor" class="com.movie.converter.MovieConverter">
+    </bean>
+    <bean id="categoryConvertor" class="com.movie.converter.CategoryConverter">
+    </bean>
+    <bean id="userConvertor" class="com.movie.converter.UserConverter">
+    </bean>
+    <bean id="modelMapper" class="org.modelmapper.ModelMapper">
+    </bean>
 </beans>
