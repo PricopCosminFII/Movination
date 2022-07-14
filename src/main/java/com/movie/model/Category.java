@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,8 +24,8 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Movie movie;
+    @ManyToMany(mappedBy = "categories")
+    private Set<Movie> movies = new HashSet<>();
 
     // to do something with category code - so we don't use the PK
 }

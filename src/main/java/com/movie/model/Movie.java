@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,13 +33,12 @@ public class Movie {
     @Column
     private Integer rating;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Category> categories;
-
-    @OneToOne
-    private MovieWatchlist movieWatchlist;
-
-    // to do something with category code - so we don't use the PK
-
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "movies_categories",
+            joinColumns = { @JoinColumn(name = "movie_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+    )
+    private Set<Category> categories = new HashSet<>();
 
 }
