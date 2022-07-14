@@ -63,4 +63,6 @@
     </bean>
 
     <jpa:repositories base-package="com.movie.repository" />
+    <import resource="classpath:/beans.xml"/>
+
 </beans>

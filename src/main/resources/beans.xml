@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.movie.service"/>
+    <context:component-scan base-package="com.movie.converter"/>
+    <context:component-scan base-package="com.movie.repository"/>
+    <context:component-scan base-package="com.movie.controller" />
+    <context:annotation-config/>
+
+    <!--- Controller -->
+    <bean id="userController" class="com.movie.controller.UserController">
+        <property name="BCryptPasswordEncoder" ref="bCryptPasswordEncoder"/>
+        <property name="userFacade" ref="userFacade"/>
+    </bean>
+
+    <!--- Service -->
+    <bean id="roleService" class="com.movie.service.impl.RoleServiceImpl">
+        <property name="roleDAO" ref="roleDAO"/>
+    </bean>
+    <bean id="userService" class="com.movie.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+        <property name="roleService" ref="roleService"/>
+    </bean>
+    <!--- Facade -->
+    <bean id="userFacade" class="com.movie.facade.impl.UserFacadeImpl">
+        <property name="userConverter" ref="userConvertor"/>
+        <property name="userService" ref="userService"/>
+    </bean>
 
     <!--- Converters -->
     <bean id="movieConvertor" class="com.movie.converter.MovieConverter">

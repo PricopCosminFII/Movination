@@ -1,0 +1,7 @@
+package com.movie.service;
+
+import com.movie.model.Role;
+
+public interface RoleService {
+    Role getByName(String s);
+}
