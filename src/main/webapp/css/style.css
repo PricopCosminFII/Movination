@@ -32,3 +32,82 @@ body {
     font-family: "Poppins", sans-serif;
     margin-top: auto;
 }
+
+.register-content {
+    height: 700px;
+    width: auto;
+    background-image: url("/images/background.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.form-content {
+    height: auto;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.16);
+    position: relative;
+    transform: translate(-50%, 7%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 10px 35px;
+}
+
+.form-content.login {
+    transform: translate(-50%, 60%);
+}
+
+.heading {
+    font-size: 24px;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    margin-bottom: 18px;
+    color: #f9bc50;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.input {
+    display: block;
+    margin-bottom: 13px;
+    margin-top: 11px;
+}
+
+.input label {
+    display: block;
+    font-size: 16px;
+    font-family: 'Anton', sans-serif;
+    color: #f9bc50;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.input input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+}
+
+.register-btn {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-family: 'Anton', sans-serif;
+    padding: 8px;
+    font-size: 14px;
+    background: #f9bc50;
+    border: 2px solid #38363654;
+    color: black;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+

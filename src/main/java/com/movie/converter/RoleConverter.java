@@ -6,20 +6,18 @@ import org.modelmapper.ModelMapper;
 
 
 public class RoleConverter {
-    private final ModelMapper modelMapper = new ModelMapper();
+    ModelMapper modelMapper;
 
     public RoleDTO convert(Role role) {
         if(role != null) {
-             RoleDTO roleDTO = modelMapper.map(role, RoleDTO.class);
-             return roleDTO;
+            return modelMapper.map(role, RoleDTO.class);
         }
         return null;
     }
 
     public Role convert(RoleDTO roleDTO) {
         if(roleDTO == null) {
-            Role role = modelMapper.map(roleDTO, Role.class);
-            return role;
+            return modelMapper.map(roleDTO, Role.class);
         }
         return null;
     }
