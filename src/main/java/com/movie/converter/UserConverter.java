@@ -2,9 +2,10 @@ package com.movie.converter;
 
 import com.movie.dto.UserDTO;
 import com.movie.model.User;
+import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
-
+@Setter
 public class UserConverter {
     ModelMapper modelMapper;
 

@@ -17,6 +17,9 @@
         <property name="BCryptPasswordEncoder" ref="bCryptPasswordEncoder"/>
         <property name="userFacade" ref="userFacade"/>
     </bean>
+    <bean id="homepageController" class="com.movie.controller.HomepageController">
+        <property name="movieFacade" ref="movieFacade"/>
+    </bean>
 
     <!--- Service -->
     <bean id="roleService" class="com.movie.service.impl.RoleServiceImpl">
@@ -27,6 +30,7 @@
         <property name="roleService" ref="roleService"/>
     </bean>
     <bean id="movieService" class="com.movie.service.impl.MovieServiceImpl">
+        <property name="movieDAO" ref="movieDAO"/>
     </bean>
     <!--- Facade -->
     <bean id="userFacade" class="com.movie.facade.impl.UserFacadeImpl">
@@ -34,14 +38,18 @@
         <property name="userService" ref="userService"/>
     </bean>
     <bean id="movieFacade" class="com.movie.facade.impl.MovieFacadeImpl">
+        <property name="movieConverter" ref="movieConvertor"/>
+        <property name="movieService" ref="movieService"/>
     </bean>
 
     <!--- Converters -->
     <bean id="movieConvertor" class="com.movie.converter.MovieConverter">
+        <property name="modelMapper" ref="modelMapper"></property>
     </bean>
     <bean id="categoryConvertor" class="com.movie.converter.CategoryConverter">
     </bean>
     <bean id="userConvertor" class="com.movie.converter.UserConverter">
+        <property name="modelMapper" ref="modelMapper"></property>
     </bean>
     <bean id="modelMapper" class="org.modelmapper.ModelMapper">
     </bean>
