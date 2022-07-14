@@ -26,10 +26,14 @@
         <property name="userDAO" ref="userDAO"/>
         <property name="roleService" ref="roleService"/>
     </bean>
+    <bean id="movieService" class="com.movie.service.impl.MovieServiceImpl">
+    </bean>
     <!--- Facade -->
     <bean id="userFacade" class="com.movie.facade.impl.UserFacadeImpl">
         <property name="userConverter" ref="userConvertor"/>
         <property name="userService" ref="userService"/>
+    </bean>
+    <bean id="movieFacade" class="com.movie.facade.impl.MovieFacadeImpl">
     </bean>
 
     <!--- Converters -->
