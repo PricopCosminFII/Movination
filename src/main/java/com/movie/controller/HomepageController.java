@@ -17,7 +17,7 @@ public class HomepageController {
 
     @GetMapping(path = "/")
     public String showHomepage(ModelMap model) {
-        List<MovieDTO> list= movieFacade.getAll();
+        List<MovieDTO> list= movieFacade.getAllMovies();
         model.addAttribute("movies", list);
         return "index";
     }

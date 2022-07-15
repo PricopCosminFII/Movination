@@ -20,6 +20,22 @@
     <bean id="homepageController" class="com.movie.controller.HomepageController">
         <property name="movieFacade" ref="movieFacade"/>
     </bean>
+    <bean id="movieController" class="com.movie.controller.MovieController">
+        <property name="objectMapper" ref="objectMapper"/>
+        <property name="movieFacade" ref="movieFacade"/>
+    </bean>
+    <bean id="categoryController" class="com.movie.controller.CategoryController">
+        <property name="objectMapper" ref="objectMapper"/>
+        <property name="categoryFacade" ref="categoryFacade"/>
+    </bean>
+    <bean id="itemController" class="com.movie.controller.ItemController">
+        <property name="objectMapper" ref="objectMapper"/>
+        <property name="itemFacade" ref="itemFacade"/>
+    </bean>
+    <bean id="watchlistController" class="com.movie.controller.WatchlistController">
+        <property name="objectMapper" ref="objectMapper"/>
+        <property name="watchlistFacade" ref="watchlistFacade"/>
+    </bean>
 
     <!--- Service -->
     <bean id="roleService" class="com.movie.service.impl.RoleServiceImpl">
@@ -31,6 +47,21 @@
     </bean>
     <bean id="movieService" class="com.movie.service.impl.MovieServiceImpl">
         <property name="movieDAO" ref="movieDAO"/>
+        <property name="categoryDAO" ref="categoryDAO"/>
+        <property name="itemDAO" ref="itemDAO"/>
+    </bean>
+    <bean id="categoryService" class="com.movie.service.impl.CategoryServiceImpl">
+        <property name="categoryDAO" ref="categoryDAO"/>
+        <property name="movieDAO" ref="movieDAO"/>
+
+    </bean>
+    <bean id="itemService" class="com.movie.service.impl.ItemServiceImpl">
+        <property name="watchlistDAO" ref="watchlistDAO"/>
+        <property name="itemDAO" ref="itemDAO"/>
+        <property name="movieDAO" ref="movieDAO"/>
+    </bean>
+    <bean id="watchlistService" class="com.movie.service.impl.WatchlistServiceImpl">
+        <property name="watchlistDAO" ref="watchlistDAO"/>
     </bean>
     <!--- Facade -->
     <bean id="userFacade" class="com.movie.facade.impl.UserFacadeImpl">
@@ -38,19 +69,43 @@
         <property name="userService" ref="userService"/>
     </bean>
     <bean id="movieFacade" class="com.movie.facade.impl.MovieFacadeImpl">
-        <property name="movieConverter" ref="movieConvertor"/>
+        <property name="movieConverter" ref="movieConverter"/>
         <property name="movieService" ref="movieService"/>
+    </bean>
+    <bean id="categoryFacade" class="com.movie.facade.impl.CategoryFacadeImpl">
+        <property name="categoryConverter" ref="categoryConverter"/>
+        <property name="categoryService" ref="categoryService"/>
+    </bean>
+    <bean id="itemFacade" class="com.movie.facade.impl.ItemFacadeImpl">
+        <property name="itemConverter" ref="itemConverter"/>
+        <property name="itemService" ref="itemService"/>
+    </bean>
+    <bean id="watchlistFacade" class="com.movie.facade.impl.WatchlistFacadeImpl">
+        <property name="watchlistService" ref="watchlistService"/>
+        <property name="watchlistConverter" ref="watchlistConverter"/>
     </bean>
 
     <!--- Converters -->
-    <bean id="movieConvertor" class="com.movie.converter.MovieConverter">
-        <property name="modelMapper" ref="modelMapper"></property>
+    <bean id="movieConverter" class="com.movie.converter.MovieConverter">
+        <property name="modelMapper" ref="modelMapper"/>
     </bean>
-    <bean id="categoryConvertor" class="com.movie.converter.CategoryConverter">
+    <bean id="categoryConverter" class="com.movie.converter.CategoryConverter">
+        <property name="modelMapper" ref="modelMapper"/>
+    </bean>
+    <bean id="itemConverter" class="com.movie.converter.ItemConverter">
+        <property name="modelMapper" ref="modelMapper"/>
+    </bean>
+    <bean id="watchlistConverter" class="com.movie.converter.WatchlistConverter">
+        <property name="modelMapper" ref="modelMapper"/>
     </bean>
     <bean id="userConvertor" class="com.movie.converter.UserConverter">
         <property name="modelMapper" ref="modelMapper"></property>
     </bean>
     <bean id="modelMapper" class="org.modelmapper.ModelMapper">
     </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+
+
 </beans>

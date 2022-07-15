@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,16 +14,18 @@ body {
 }
 
 /*Navbar*/
-.btn-outline-success{
+.btn-outline-success {
     color: #f9bc50;
     border-color: #f9bc50;
 }
-.btn-outline-success:hover{
+
+.btn-outline-success:hover {
     color: white;
     background-color: #f9bc50;
     border-color: #f9bc50;
 }
-.navbar-dark .navbar-nav .nav-link{
+
+.navbar-dark .navbar-nav .nav-link {
     font-family: 'Anton', sans-serif;
     color: #f9bc50;
 }

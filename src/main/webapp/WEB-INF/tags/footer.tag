@@ -3,17 +3,20 @@
         <div class="container p-4 pb-0">
             <section class="mb-4">
                 <!-- Facebook -->
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/youngcultureGroup" role="button"
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/youngcultureGroup"
+                   role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Instagram -->
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/youngculture.ro/" role="button"
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/youngculture.ro/"
+                   role="button"
                 ><i class="fab fa-instagram"></i
                 ></a>
 
                 <!-- Linkedin -->
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/company/youngculture" role="button"
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/company/youngculture"
+                   role="button"
                 ><i class="fab fa-linkedin-in"></i
                 ></a>
             </section>
