@@ -7,10 +7,13 @@ import org.modelmapper.ModelMapper;
 
 @Setter
 public class MovieConverter {
-    ModelMapper modelMapper;
+
+    private ModelMapper modelMapper;
 
     public Movie convert(MovieDTO movieDTO) {
         if (movieDTO != null) {
+            if (movieDTO.getId() != null)
+                movieDTO.setId(null);
             return modelMapper.map(movieDTO, Movie.class);
         }
         return null;

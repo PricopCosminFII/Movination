@@ -4,41 +4,42 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "movie")
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
+    @Column(nullable = false)
     private String name;
-
+    @Column
+    private Integer year;
+    @Column
+    private Long minutes;
     @Column
     private String description;
-
     @Column
     private String picture;
     @Column
-    private Integer rating;
+    private Double rating;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "movies_categories",
-            joinColumns = { @JoinColumn(name = "movie_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
-    )
-    private Set<Category> categories = new HashSet<>();
+    @ManyToMany(mappedBy = "movies", cascade = CascadeType.ALL)
+    @UniqueElements
+    private List<Category> categories;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<Item> items;
+
+    // to do something with category code - so we don't use the PK
+
 
 }

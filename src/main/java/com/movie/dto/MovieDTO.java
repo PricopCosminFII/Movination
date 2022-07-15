@@ -19,6 +19,10 @@ public class MovieDTO {
 
     private String picture;
 
-    private Integer rating;
+    private Double rating;
+
+    private Integer year;
+
+    private Long minutes;
 
 }

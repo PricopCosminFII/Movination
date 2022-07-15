@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table
@@ -14,14 +13,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieWatchlist {
+public class Item {
+    @ManyToOne
+    Watchlist watchlist;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private Integer userRating;
-    @OneToOne
+    private Double userRating;
+    @ManyToOne
     private Movie movie;
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    List<Watchlist> watchlists;
 }

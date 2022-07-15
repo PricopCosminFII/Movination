@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,8 +24,9 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Movie> movies = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @UniqueElements
+    private List<Movie> movies;
 
     // to do something with category code - so we don't use the PK
 }
