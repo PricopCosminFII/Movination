@@ -11,18 +11,28 @@
     <http auto-config="true">
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/register" access="permitAll()"/>
+        <intercept-url pattern="/login" access="isAnonymous()" />
+        <form-login login-page="/login" default-target-url="/"
+                    username-parameter="email"
+                    password-parameter="password"
+                    authentication-failure-url="/login?error" />
+        <logout logout-success-url="/" logout-url="/j_spring_security_logout" />
         <csrf disabled="true" />
+        <access-denied-handler ref="accessDeniedHandler"/>
     </http>
+
 
     <beans:bean id="bCryptPasswordEncoder"
           class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </beans:bean>
+    <beans:bean id="accessDeniedHandler"
+                class="com.movie.handler.CustomAccessDeniedHandler">
+    </beans:bean>
+
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="1234" authorities="hasRole(ROLE_ADMIN)"/>
-            </user-service>
+        <authentication-provider user-service-ref="securityUserDetailsService">
+            <password-encoder ref="bCryptPasswordEncoder" />
         </authentication-provider>
     </authentication-manager>
 

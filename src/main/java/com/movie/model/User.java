@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -46,6 +45,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"
             ))
+    @NotNull
     private Collection<Role> roles = new HashSet<>();
 
     @OneToOne

@@ -64,6 +64,9 @@
     <bean id="watchlistService" class="com.movie.service.impl.WatchlistServiceImpl">
         <property name="watchlistDAO" ref="watchlistDAO"/>
     </bean>
+    <bean id="securityUserDetailsService" class="com.movie.service.impl.SecurityUserDetailsService">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
     <!--- Facade -->
     <bean id="userFacade" class="com.movie.facade.impl.UserFacadeImpl">
         <property name="userConverter" ref="userConvertor"/>
@@ -106,7 +109,6 @@
     </bean>
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
-
 
 
 </beans>

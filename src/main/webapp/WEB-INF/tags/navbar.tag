@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar  navbar-dark navbar-expand-lg bg-dark" id="navbar">
     <div class="container-fluid">
@@ -15,17 +16,25 @@
                     <a class="nav-link" href="<spring:url value='/' />" >Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<spring:url value='/login' />" >Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<spring:url value='/register' />" >Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">My list</a>
                 </li>
+                <c:choose>
+                    <c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal == null}">
+                        <security:authorize access="isAnonymous()">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<spring:url value='/login' />" >Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<spring:url value='/register' />" >Register</a>
+                            </li>
+                        </security:authorize>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<spring:url value='/j_spring_security_logout' />">Logout</a>
+                        </li>
+                </c:otherwise>
+                </c:choose>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -336,3 +336,9 @@ body {
         margin: 10px 0;
     }
 }
+
+.error {
+    color: red;
+    font-size: 17px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
