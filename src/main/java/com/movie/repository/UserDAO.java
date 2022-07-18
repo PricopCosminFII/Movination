@@ -10,4 +10,6 @@ public interface UserDAO extends CrudRepository<User, Long>, JpaRepository<User,
     <S extends User> S save(S entity);
 
     boolean existsUserByEmail(String s);
+
+    User findUserByEmail(String email);
 }

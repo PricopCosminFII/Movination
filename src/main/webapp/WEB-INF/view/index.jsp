@@ -10,8 +10,8 @@
         <c:forEach items="${movies}" var="movie">
             <div id="col" class="col mx-2">
                 <img src="${movie.picture}" alt="" width="200" height="300">
-                <p>${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i></p>
-                <p>${movie.name}</p>
+                <div class="movie-rating">${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i></div>
+                <div class="movie-name">${movie.name}</div>
                 <div class="btn-holder">
                     <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
                 </div>
@@ -39,6 +39,5 @@
 </div>
 
 <n:footer/>
-<script src="js/main.js"></script>
 </body>
 </html>
