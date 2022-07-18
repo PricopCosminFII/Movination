@@ -9,19 +9,21 @@ import com.movie.exception.*;
 import com.movie.facade.MovieFacade;
 import com.movie.model.Movie;
 import com.movie.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Setter
+@Transactional
 public class MovieFacadeImpl implements MovieFacade {
     private MovieService movieService;
     private MovieConverter movieConverter;
 
     @Override
-    @Transactional
     public void save(MovieDTO movieDTO) throws ObjectNull, NameFieldNull, ObjectAlreadyExists, InvalidData {
         if (movieDTO == null)
             throw new ObjectNull(MessageConstants.MOVIE_DTO_NULL);
@@ -32,7 +34,6 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    @Transactional
     public List<MovieDTO> getAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
         if (movies != null && !movies.isEmpty()) {
@@ -49,7 +50,6 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    @Transactional
     public List<MovieDTO> getMoviesByCategory(CategoryDTO categoryDTO) throws ObjectNull, NameFieldNull, ObjectNotFound {
         if (categoryDTO == null)
             throw new ObjectNull(MessageConstants.CATEGORY_DTO_NULL);
@@ -62,7 +62,6 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    @Transactional
     public MovieDTO getMovieByItem(ItemDTO itemDTO) throws ObjectNull, IdFieldNull, ObjectNotFound {
         if (itemDTO == null)
             throw new ObjectNull(MessageConstants.ITEM_DTO_NULL);
@@ -75,7 +74,6 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    @Transactional
     public void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, NameFieldNull, ObjectNotFound, ObjectAlreadyExists, IdFieldNull {
         if (movieDTO == null)
             throw new ObjectNull(MessageConstants.MOVIE_DTO_NULL);
@@ -90,5 +88,10 @@ public class MovieFacadeImpl implements MovieFacade {
             categoryNames.add(categoryDTO.getName());
         }
         movieService.addCategoriesToMovie(movieDTO.getId(), categoryNames);
+    }
+
+    @Override
+    public MovieDTO getById(Long id) {
+        return movieConverter.convert(movieService.getById(id));
     }
 }

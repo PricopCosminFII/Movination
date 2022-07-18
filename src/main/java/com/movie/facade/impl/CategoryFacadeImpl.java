@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter
+@Transactional
 public class CategoryFacadeImpl implements CategoryFacade {
     private CategoryService categoryService;
     private CategoryConverter categoryConverter;
 
     @Override
-    @Transactional
     public void save(CategoryDTO categoryDTO) throws NameFieldNull, ObjectAlreadyExists, ObjectNull {
         if (categoryDTO == null)
             throw new ObjectNull(MessageConstants.CATEGORY_DTO_NULL);
@@ -30,7 +30,6 @@ public class CategoryFacadeImpl implements CategoryFacade {
     }
 
     @Override
-    @Transactional
     public List<CategoryDTO> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         if (categories != null && !categories.isEmpty()) {
@@ -47,7 +46,6 @@ public class CategoryFacadeImpl implements CategoryFacade {
     }
 
     @Override
-    @Transactional
     public List<CategoryDTO> getAllCategoriesFromMovie(MovieDTO movieDTO) throws ObjectNull, ObjectNotFound, IdFieldNull {
         if (movieDTO == null)
             throw new ObjectNull(MessageConstants.MOVIE_DTO_NULL);
