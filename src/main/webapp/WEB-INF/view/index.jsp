@@ -13,7 +13,7 @@
                 <p>${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i></p>
                 <p>${movie.name}</p>
                 <div class="btn-holder">
-                    <button class="watchlist-btn" type="submit">See more details</button>
+                    <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
                 </div>
             </div>
         </c:forEach>

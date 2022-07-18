@@ -16,19 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter
+@Transactional
 public class ItemFacadeImpl implements ItemFacade {
     private ItemService itemService;
     private ItemConverter itemConverter;
 
     @Override
-    @Transactional
     public void addMovieToWatchlist(MovieDTO movieDTO, WatchlistDTO watchlistDTO) throws ObjectNull, IdFieldNull, ObjectNotFound, ObjectAlreadyExists {
         verify(movieDTO, watchlistDTO);
         itemService.addMovieToWatchlist(watchlistDTO.getId(), movieDTO.getId());
     }
 
     @Override
-    @Transactional
     public void removeMovieFromWatchlist(MovieDTO movieDTO, WatchlistDTO watchlistDTO) throws ObjectNull, IdFieldNull, ObjectNotFound {
         verify(movieDTO, watchlistDTO);
         itemService.removeMovieFromWatchlist(watchlistDTO.getId(), movieDTO.getId());
@@ -47,7 +46,6 @@ public class ItemFacadeImpl implements ItemFacade {
     }
 
     @Override
-    @Transactional
     public void addRatingToMovieFromWatchlist(Double rating, MovieDTO movieDTO, WatchlistDTO watchlistDTO) throws ObjectNull, IdFieldNull, InvalidData, ObjectNotFound {
         if (rating == null)
             throw new ObjectNull(MessageConstants.RATING_NULL);
@@ -56,7 +54,6 @@ public class ItemFacadeImpl implements ItemFacade {
     }
 
     @Override
-    @Transactional
     public List<ItemDTO> getItemsFromWatchlist(WatchlistDTO watchlistDTO) throws ObjectNull, IdFieldNull, ObjectNotFound {
         if (watchlistDTO == null)
             throw new ObjectNull(MessageConstants.WATCHLIST_DTO_NULL);

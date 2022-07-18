@@ -24,7 +24,7 @@ function getPageList(totalPages, page, maxLength) {
 }
 
 
-$(function() {
+$(function () {
     let list_element = document.querySelectorAll("#col").length;
     let limitPerPage = 5;
     let totalPages = Math.ceil(list_element / limitPerPage);
@@ -54,16 +54,24 @@ $(function() {
     );
     showPage(1);
 
-    $(document).on("click", ".pagination li.current-page:not(.active)", function() {
+    $(document).on("click", ".pagination li.current-page:not(.active)", function () {
         return showPage(+$(this).text());
     });
 
-    $(".next-page").on("click", function() {
+    $(".next-page").on("click", function () {
         return showPage(currentPage + 1);
     });
 
-    $(".previous-page").on("click", function() {
+    $(".previous-page").on("click", function () {
         return showPage(currentPage - 1);
     });
 });
+
+$(document).ready(function () {
+    $(".details-btn").click(function () {
+        var idMovie = $(this).val();
+        var datastring = 'id=' + idMovie;
+        window.location.href = "details?" + datastring + "";
+    })
+})
 

@@ -11,12 +11,14 @@ import com.movie.repository.CategoryDAO;
 import com.movie.repository.ItemDAO;
 import com.movie.repository.MovieDAO;
 import com.movie.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Setter
 public class MovieServiceImpl implements MovieService {
     private CategoryDAO categoryDAO;
@@ -34,13 +36,18 @@ public class MovieServiceImpl implements MovieService {
         movieDAO.save(movie);
     }
 
+    @Override
+    public List<Movie> getAllMovies() {
+        return movieDAO.findAll();
+    }
+
     private Integer getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 
     @Override
-    public List<Movie> getAllMovies() {
-        return movieDAO.findAll();
+    public Movie getById(Long id) {
+        return movieDAO.findMovieById(id);
     }
 
     @Override
