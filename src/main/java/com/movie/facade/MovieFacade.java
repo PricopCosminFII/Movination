@@ -1,22 +1,22 @@
 package com.movie.facade;
 
 import com.movie.dto.CategoryDTO;
-import com.movie.dto.ItemDTO;
 import com.movie.dto.MovieDTO;
+import com.movie.dto.WatchlistItemDTO;
 import com.movie.exception.*;
 
 import java.util.List;
 
 public interface MovieFacade {
-    void save(MovieDTO movieDTO) throws ObjectNull, NameFieldNull, ObjectAlreadyExists, InvalidData;
+    void save(MovieDTO movieDTO) throws ObjectNull, RequiredFieldNull, ObjectAlreadyExists, InvalidData;
 
     List<MovieDTO> getAllMovies();
 
-    List<MovieDTO> getMoviesByCategory(CategoryDTO categoryDTO) throws ObjectNull, NameFieldNull, ObjectNotFound;
+    List<MovieDTO> getMoviesByCategory(CategoryDTO categoryDTO) throws ObjectNull, RequiredFieldNull, ObjectNotFound;
 
-    MovieDTO getMovieByItem(ItemDTO itemDTO) throws ObjectNull, IdFieldNull, ObjectNotFound;
+    MovieDTO getMovieByItem(WatchlistItemDTO watchlistItemDTO) throws ObjectNull, RequiredFieldNull, ObjectNotFound;
 
-    void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, NameFieldNull, ObjectNotFound, ObjectAlreadyExists, IdFieldNull;
+    void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, RequiredFieldNull, ObjectNotFound, ObjectAlreadyExists;
 
     MovieDTO getById(Long id);
 }

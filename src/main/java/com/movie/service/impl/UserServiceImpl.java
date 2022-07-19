@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
         userDAO.save(user);
     }
 
-    public boolean existsUserByEmail(User user){
-        return  userDAO.existsUserByEmail(user.getEmail());
+    public boolean existsUserByEmail(User user) {
+        return userDAO.existsUserByEmail(user.getEmail());
     }
 
 }

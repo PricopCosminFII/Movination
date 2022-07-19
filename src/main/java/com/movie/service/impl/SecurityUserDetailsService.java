@@ -12,7 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 import static com.movie.constants.MessageConstants.NO_USER_FOUND;
 
@@ -21,6 +22,14 @@ import static com.movie.constants.MessageConstants.NO_USER_FOUND;
 @Transactional
 public class SecurityUserDetailsService implements UserDetailsService {
     UserDAO userDAO;
+
+    private static Collection<GrantedAuthority> getAuthorities(Collection<Role> roles) {
+        Collection<GrantedAuthority> authorities = new HashSet<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -36,13 +45,5 @@ public class SecurityUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(), enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoles()));
-    }
-
-    private static Collection<GrantedAuthority> getAuthorities (Collection<Role> roles) {
-        Collection<GrantedAuthority> authorities = new HashSet<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
     }
 }

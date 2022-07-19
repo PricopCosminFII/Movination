@@ -1,6 +1,5 @@
 package com.movie.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movie.dto.UserDTO;
 import com.movie.facade.UserFacade;
 import lombok.Setter;
@@ -32,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model){
+    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
         if (error != null) {
             model.addAttribute("error", "Invalid username or password!");
         }

@@ -20,7 +20,7 @@ public class Watchlist {
     private Long id;
 
     @OneToMany(mappedBy = "watchlist", cascade = CascadeType.ALL)
-    private List<Item> items;
+    private List<WatchlistItem> watchlistItems;
 
     @OneToOne
     private User user;

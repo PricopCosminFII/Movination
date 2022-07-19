@@ -2,12 +2,14 @@ package com.movie.constants;
 
 public class MessageConstants {
     public final static String MOVIE_DTO_NULL = "MovieDTO object cannot be null!";
+    public final static String USER_DTO_NULL = "UserDTO object cannot be null!";
     public final static String CATEGORY_DTO_NULL = "CategoryDTO object cannot be null!";
     public final static String WATCHLIST_DTO_NULL = "WatchlistDTO object cannot be null!";
-    public final static String ITEM_DTO_NULL = "ItemDTO object cannot be null!";
+    public final static String ITEM_DTO_NULL = "WatchlistItemDTO object cannot be null!";
     public final static String ID_FIELD_OF_WATCHLIST_DTO_NULL = "The id field from WatchlistDTO object cannot be null!";
     public final static String ID_FIELD_OF_MOVIE_DTO_NULL = "The id field from MovieDTO object cannot be null!";
-    public final static String ID_FIELD_OF_ITEM_DTO_NULL = "The id field from ItemDTO object cannot be null!";
+    public final static String ID_FIELD_OF_ITEM_DTO_NULL = "The id field from WatchlistItemDTO object cannot be null!";
+    public final static String EMAIL_FIELD_OF_USER_DTO_NULL = "The email field from UserDTO object cannot be null!";
     public final static String NAME_FIELD_OF_MOVIE_DTO_NULL = "The name field from MovieDTO object cannot be null!";
     public final static String NAME_FIELD_OF_CATEGORY_DTO_NULL = "The name field from CategoryDTO object cannot be null!";
     public final static String CATEGORY_EXISTS_IN_MOVIE = "This category already exists in this movie!";
@@ -18,6 +20,7 @@ public class MessageConstants {
     public final static String MOVIE_NOT_FOUND = "This movie doesn't exists!";
     public final static String WATCHLIST_NOT_FOUND = "This watchlist doesn't exists!";
     public final static String ITEM_NOT_FOUND = "This item doesn't exists!";
+    public final static String USER_NOT_FOUND = "This user doesn't exists!";
     public final static String MOVIE_NOT_FOUND_IN_WATCHLIST = "This movie doesn't exists in this watchlist!";
     public final static String INVALID_RATING = "The rating must be in interval [1, 5]!";
     public final static String INVALID_YEAR = "Invalid year!";
@@ -32,5 +35,9 @@ public class MessageConstants {
     public final static String LIST_CATEGORY_DTO_NULL = "List of CategoryDTO objects cannot be null or empty!";
     public final static String RATING_NULL = "Rating cannot be null!";
     public final static String NO_USER_FOUND = "No user found with this email: ";
+    public final static String REDIRECT_TO_LOGIN = "/login";
+    public final static String REDIRECT_TO_HOME = "/";
+    public final static String SUCCESS = "success";
+    public final static String USER_IS_ANONYMOUS = "anonymousUser";
 
 }

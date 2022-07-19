@@ -37,7 +37,7 @@ public class Movie {
     private List<Category> categories;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Item> items;
+    private List<WatchlistItem> watchlistItems;
 
     // to do something with category code - so we don't use the PK
 

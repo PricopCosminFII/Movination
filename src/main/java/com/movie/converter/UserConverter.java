@@ -10,14 +10,14 @@ public class UserConverter {
     ModelMapper modelMapper;
 
     public UserDTO convert(User user) {
-        if(user != null) {
+        if (user != null) {
             return modelMapper.map(user, UserDTO.class);
         }
         return null;
     }
 
     public User convert(UserDTO userDTO) {
-        if(userDTO != null) {
+        if (userDTO != null) {
             return modelMapper.map(userDTO, User.class);
         }
         return null;
