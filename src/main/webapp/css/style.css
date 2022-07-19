@@ -238,6 +238,20 @@ body {
     cursor: pointer;
 }
 
+.watchlist-btn {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-family: 'Anton', sans-serif;
+    padding: 8px;
+    font-size: 14px;
+    background: #f9bc50;
+    border: 2px solid #38363654;
+    color: black;
+    border-radius: 6px;
+    width: 70%;
+    cursor: pointer;
+}
+
 .pagination {
     justify-content: center;
     font-family: 'Poppins', sans-serif;
@@ -322,6 +336,23 @@ body {
 
 .pagination li.active a.page-link {
     background: #f9bc50;
+}
+
+.stars i {
+    color: #999;
+}
+
+.stars i.prv {
+    color: #ffd400;
+}
+
+.col .remove {
+    position: absolute;
+    top: 2%;
+    left: 9%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+
 }
 
 @media only screen and (max-width: 480px) {

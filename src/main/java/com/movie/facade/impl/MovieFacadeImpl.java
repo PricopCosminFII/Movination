@@ -3,8 +3,8 @@ package com.movie.facade.impl;
 import com.movie.constants.MessageConstants;
 import com.movie.converter.MovieConverter;
 import com.movie.dto.CategoryDTO;
-import com.movie.dto.ItemDTO;
 import com.movie.dto.MovieDTO;
+import com.movie.dto.WatchlistItemDTO;
 import com.movie.exception.*;
 import com.movie.facade.MovieFacade;
 import com.movie.model.Movie;
@@ -24,11 +24,11 @@ public class MovieFacadeImpl implements MovieFacade {
     private MovieConverter movieConverter;
 
     @Override
-    public void save(MovieDTO movieDTO) throws ObjectNull, NameFieldNull, ObjectAlreadyExists, InvalidData {
+    public void save(MovieDTO movieDTO) throws ObjectNull, RequiredFieldNull, ObjectAlreadyExists, InvalidData {
         if (movieDTO == null)
             throw new ObjectNull(MessageConstants.MOVIE_DTO_NULL);
         if (movieDTO.getName() == null)
-            throw new NameFieldNull(MessageConstants.NAME_FIELD_OF_MOVIE_DTO_NULL);
+            throw new RequiredFieldNull(MessageConstants.NAME_FIELD_OF_MOVIE_DTO_NULL);
         movieService.save(movieConverter.convert(movieDTO));
 
     }
@@ -50,11 +50,11 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    public List<MovieDTO> getMoviesByCategory(CategoryDTO categoryDTO) throws ObjectNull, NameFieldNull, ObjectNotFound {
+    public List<MovieDTO> getMoviesByCategory(CategoryDTO categoryDTO) throws ObjectNull, RequiredFieldNull, ObjectNotFound {
         if (categoryDTO == null)
             throw new ObjectNull(MessageConstants.CATEGORY_DTO_NULL);
         if (categoryDTO.getName() == null)
-            throw new NameFieldNull(MessageConstants.NAME_FIELD_OF_CATEGORY_DTO_NULL);
+            throw new RequiredFieldNull(MessageConstants.NAME_FIELD_OF_CATEGORY_DTO_NULL);
         List<Movie> movies = movieService.getMovieByCategoryName(categoryDTO.getName());
         if (movies != null && !movies.isEmpty())
             return getMovieDTOS(movies);
@@ -62,29 +62,29 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    public MovieDTO getMovieByItem(ItemDTO itemDTO) throws ObjectNull, IdFieldNull, ObjectNotFound {
-        if (itemDTO == null)
+    public MovieDTO getMovieByItem(WatchlistItemDTO watchlistItemDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
+        if (watchlistItemDTO == null)
             throw new ObjectNull(MessageConstants.ITEM_DTO_NULL);
-        if (itemDTO.getId() == null)
-            throw new IdFieldNull(MessageConstants.ID_FIELD_OF_ITEM_DTO_NULL);
-        Movie movie = movieService.getMovieByItemId(itemDTO.getId());
+        if (watchlistItemDTO.getId() == null)
+            throw new RequiredFieldNull(MessageConstants.ID_FIELD_OF_ITEM_DTO_NULL);
+        Movie movie = movieService.getMovieByItemId(watchlistItemDTO.getId());
         if (movie != null)
             return movieConverter.convert(movie);
         return null;
     }
 
     @Override
-    public void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, NameFieldNull, ObjectNotFound, ObjectAlreadyExists, IdFieldNull {
+    public void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, RequiredFieldNull, ObjectNotFound, ObjectAlreadyExists {
         if (movieDTO == null)
             throw new ObjectNull(MessageConstants.MOVIE_DTO_NULL);
         if (movieDTO.getId() == null)
-            throw new IdFieldNull(MessageConstants.ID_FIELD_OF_MOVIE_DTO_NULL);
+            throw new RequiredFieldNull(MessageConstants.ID_FIELD_OF_MOVIE_DTO_NULL);
         if (categoryDTOS == null || categoryDTOS.isEmpty())
             throw new ObjectNull(MessageConstants.LIST_CATEGORY_DTO_NULL);
         List<String> categoryNames = new ArrayList<>();
         for (CategoryDTO categoryDTO : categoryDTOS) {
             if (categoryDTO.getName() == null)
-                throw new NameFieldNull(MessageConstants.NAME_FIELD_OF_CATEGORY_DTO_NULL);
+                throw new RequiredFieldNull(MessageConstants.NAME_FIELD_OF_CATEGORY_DTO_NULL);
             categoryNames.add(categoryDTO.getName());
         }
         movieService.addCategoriesToMovie(movieDTO.getId(), categoryNames);

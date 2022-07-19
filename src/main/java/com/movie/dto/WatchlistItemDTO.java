@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class WatchlistDTO {
+public class WatchlistItemDTO {
     Long id;
+    Double userRating;
 }

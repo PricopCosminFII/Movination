@@ -6,11 +6,13 @@ import com.movie.facade.WatchlistFacade;
 import com.movie.model.Watchlist;
 import com.movie.service.WatchlistService;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Setter
+@Transactional
 public class WatchlistFacadeImpl implements WatchlistFacade {
     private WatchlistService watchlistService;
     private WatchlistConverter watchlistConverter;

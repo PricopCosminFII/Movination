@@ -5,11 +5,11 @@ import com.movie.exception.InvalidData;
 import com.movie.exception.ObjectAlreadyExists;
 import com.movie.exception.ObjectNotFound;
 import com.movie.model.Category;
-import com.movie.model.Item;
 import com.movie.model.Movie;
+import com.movie.model.WatchlistItem;
 import com.movie.repository.CategoryDAO;
-import com.movie.repository.ItemDAO;
 import com.movie.repository.MovieDAO;
+import com.movie.repository.WatchlistItemDAO;
 import com.movie.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService {
     private CategoryDAO categoryDAO;
     private MovieDAO movieDAO;
-    private ItemDAO itemDAO;
+    private WatchlistItemDAO watchlistItemDAO;
 
     @Override
     public void save(Movie movie) throws ObjectAlreadyExists, InvalidData {
@@ -79,10 +79,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie getMovieByItemId(Long id) throws ObjectNotFound {
-        Item item = itemDAO.findItemById(id);
-        if (item == null)
+        WatchlistItem watchlistItem = watchlistItemDAO.findItemById(id);
+        if (watchlistItem == null)
             throw new ObjectNotFound(MessageConstants.ITEM_NOT_FOUND);
-        return item.getMovie();
+        return watchlistItem.getMovie();
     }
 
     private void addMovieToCategories(Movie movie, List<Category> categories) {

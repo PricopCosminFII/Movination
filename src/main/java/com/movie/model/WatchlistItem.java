@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class WatchlistItem {
     @ManyToOne
     Watchlist watchlist;
     @Id

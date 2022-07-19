@@ -12,5 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <%@ taglib prefix="js" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib tagdir="/WEB-INF/tags" prefix="n" %>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
 
 </head>

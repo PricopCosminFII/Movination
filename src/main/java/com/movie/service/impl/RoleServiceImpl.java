@@ -9,6 +9,7 @@ import lombok.Setter;
 public class RoleServiceImpl implements RoleService {
 
     RoleDAO roleDAO;
+
     @Override
     public Role getByName(String s) {
         return roleDAO.findByName(s);

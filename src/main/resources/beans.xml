@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -9,7 +9,7 @@
     <context:component-scan base-package="com.movie.service"/>
     <context:component-scan base-package="com.movie.converter"/>
     <context:component-scan base-package="com.movie.repository"/>
-    <context:component-scan base-package="com.movie.controller" />
+    <context:component-scan base-package="com.movie.controller"/>
     <context:annotation-config/>
 
     <!--- Controller -->
@@ -20,6 +20,7 @@
     <bean id="homepageController" class="com.movie.controller.HomepageController">
         <property name="movieFacade" ref="movieFacade"/>
         <property name="categoryFacade" ref="categoryFacade"/>
+        <property name="watchlistItemFacade" ref="watchlistItemFacade"/>
     </bean>
     <bean id="movieController" class="com.movie.controller.MovieController">
         <property name="objectMapper" ref="objectMapper"/>
@@ -29,12 +30,10 @@
         <property name="objectMapper" ref="objectMapper"/>
         <property name="categoryFacade" ref="categoryFacade"/>
     </bean>
-    <bean id="itemController" class="com.movie.controller.ItemController">
-        <property name="objectMapper" ref="objectMapper"/>
-        <property name="itemFacade" ref="itemFacade"/>
+    <bean id="watchlistItemController" class="com.movie.controller.WatchlistItemController">
+        <property name="watchlistItemFacade" ref="watchlistItemFacade"/>
     </bean>
     <bean id="watchlistController" class="com.movie.controller.WatchlistController">
-        <property name="objectMapper" ref="objectMapper"/>
         <property name="watchlistFacade" ref="watchlistFacade"/>
     </bean>
 
@@ -49,17 +48,18 @@
     <bean id="movieService" class="com.movie.service.impl.MovieServiceImpl">
         <property name="movieDAO" ref="movieDAO"/>
         <property name="categoryDAO" ref="categoryDAO"/>
-        <property name="itemDAO" ref="itemDAO"/>
+        <property name="watchlistItemDAO" ref="watchlistItemDAO"/>
     </bean>
     <bean id="categoryService" class="com.movie.service.impl.CategoryServiceImpl">
         <property name="categoryDAO" ref="categoryDAO"/>
         <property name="movieDAO" ref="movieDAO"/>
 
     </bean>
-    <bean id="itemService" class="com.movie.service.impl.ItemServiceImpl">
+    <bean id="watchlistItemService" class="com.movie.service.impl.WatchlistItemServiceImpl">
         <property name="watchlistDAO" ref="watchlistDAO"/>
-        <property name="itemDAO" ref="itemDAO"/>
+        <property name="watchlistItemDAO" ref="watchlistItemDAO"/>
         <property name="movieDAO" ref="movieDAO"/>
+        <property name="userDAO" ref="userDAO"/>
     </bean>
     <bean id="watchlistService" class="com.movie.service.impl.WatchlistServiceImpl">
         <property name="watchlistDAO" ref="watchlistDAO"/>
@@ -80,9 +80,10 @@
         <property name="categoryConverter" ref="categoryConverter"/>
         <property name="categoryService" ref="categoryService"/>
     </bean>
-    <bean id="itemFacade" class="com.movie.facade.impl.ItemFacadeImpl">
-        <property name="itemConverter" ref="itemConverter"/>
-        <property name="itemService" ref="itemService"/>
+    <bean id="watchlistItemFacade" class="com.movie.facade.impl.WatchlistItemFacadeImpl">
+        <property name="watchlistItemConverter" ref="watchlistItemConverter"/>
+        <property name="watchlistItemService" ref="watchlistItemService"/>
+        <property name="movieConverter" ref="movieConverter"/>
     </bean>
     <bean id="watchlistFacade" class="com.movie.facade.impl.WatchlistFacadeImpl">
         <property name="watchlistService" ref="watchlistService"/>
@@ -96,14 +97,14 @@
     <bean id="categoryConverter" class="com.movie.converter.CategoryConverter">
         <property name="modelMapper" ref="modelMapper"/>
     </bean>
-    <bean id="itemConverter" class="com.movie.converter.ItemConverter">
+    <bean id="watchlistItemConverter" class="com.movie.converter.WatchlistItemConverter">
         <property name="modelMapper" ref="modelMapper"/>
     </bean>
     <bean id="watchlistConverter" class="com.movie.converter.WatchlistConverter">
         <property name="modelMapper" ref="modelMapper"/>
     </bean>
     <bean id="userConvertor" class="com.movie.converter.UserConverter">
-        <property name="modelMapper" ref="modelMapper"></property>
+        <property name="modelMapper" ref="modelMapper"/>
     </bean>
     <bean id="modelMapper" class="org.modelmapper.ModelMapper">
     </bean>

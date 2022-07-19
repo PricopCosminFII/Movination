@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movie.constants.MessageConstants;
 import com.movie.dto.CategoryDTO;
-import com.movie.dto.ItemDTO;
 import com.movie.dto.MovieDTO;
+import com.movie.dto.WatchlistItemDTO;
 import com.movie.exception.*;
 import com.movie.facade.MovieFacade;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,55 +24,55 @@ public class MovieController {
 
     @PostMapping("/movie")
     @ResponseBody
-    public String save(@ModelAttribute MovieDTO movieDTO) throws JsonProcessingException {
+    public ResponseEntity<String> save(@ModelAttribute MovieDTO movieDTO) throws JsonProcessingException {
 
         try {
             movieFacade.save(movieDTO);
-            return MessageConstants.SUCCESSFUL_CREATION_MOVIE;
-        } catch (ObjectNull | NameFieldNull | ObjectAlreadyExists | InvalidData e) {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.OK).body(MessageConstants.SUCCESSFUL_CREATION_MOVIE);
+        } catch (ObjectNull | RequiredFieldNull | ObjectAlreadyExists | InvalidData e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @PostMapping("/movie/categories/add")
     @ResponseBody
-    public String addCategoriesToMovie(@ModelAttribute MovieDTO movieDTO, @RequestBody List<CategoryDTO> categoryDTOS) {
+    public ResponseEntity<String> addCategoriesToMovie(@ModelAttribute MovieDTO movieDTO, @RequestBody List<CategoryDTO> categoryDTOS) {
 
         try {
             movieFacade.addCategoriesToMovie(movieDTO, categoryDTOS);
-            return MessageConstants.SUCCESSFUL_ADDING_CATEGORIES_TO_MOVIE;
-        } catch (ObjectNull | NameFieldNull | ObjectNotFound | ObjectAlreadyExists | IdFieldNull e) {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.OK).body(MessageConstants.SUCCESSFUL_ADDING_CATEGORIES_TO_MOVIE);
+        } catch (ObjectNull | RequiredFieldNull | ObjectNotFound | ObjectAlreadyExists e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @GetMapping("/movies")
     @ResponseBody
-    public String getAllMovies() throws JsonProcessingException {
+    public ResponseEntity<String> getAllMovies() throws JsonProcessingException {
         List<MovieDTO> movieDTOS = movieFacade.getAllMovies();
-        return objectMapper.writeValueAsString(movieDTOS);
+        return ResponseEntity.status(HttpStatus.OK).body(objectMapper.writeValueAsString(movieDTOS));
     }
 
     @GetMapping("/movies/category")
     @ResponseBody
-    public String getMoviesByCategory(@ModelAttribute CategoryDTO categoryDTO) throws JsonProcessingException {
+    public ResponseEntity<String> getMoviesByCategory(@ModelAttribute CategoryDTO categoryDTO) throws JsonProcessingException {
         try {
             List<MovieDTO> movieDTOS = movieFacade.getMoviesByCategory(categoryDTO);
-            return objectMapper.writeValueAsString(movieDTOS);
-        } catch (ObjectNull | NameFieldNull | ObjectNotFound e) {
-            return e.getMessage();
+            return ResponseEntity.status(HttpStatus.OK).body(objectMapper.writeValueAsString(movieDTOS));
+        } catch (ObjectNull | RequiredFieldNull | ObjectNotFound e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
     }
 
     @GetMapping("/movie/item")
     @ResponseBody
-    public String getMovieByItem(@ModelAttribute ItemDTO itemDTO) throws JsonProcessingException {
+    public ResponseEntity<String> getMovieByItem(@ModelAttribute WatchlistItemDTO watchlistItemDTO) throws JsonProcessingException {
         try {
-            MovieDTO movieDTO = movieFacade.getMovieByItem(itemDTO);
-            return objectMapper.writeValueAsString(movieDTO);
-        } catch (ObjectNull | IdFieldNull | ObjectNotFound e) {
-            return e.getMessage();
+            MovieDTO movieDTO = movieFacade.getMovieByItem(watchlistItemDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(objectMapper.writeValueAsString(movieDTO));
+        } catch (ObjectNull | ObjectNotFound | RequiredFieldNull e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
     }
