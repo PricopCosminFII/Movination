@@ -37,10 +37,12 @@
                     </c:otherwise>
                 </c:choose>
             </ul>
+            <div class="custom-search">
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success searchbtn" type="submit">Search</button>
+                <button class="fa btn btn-outline-success searchbtn" type="submit">&#xf002</button>
             </form>
+            </div>
         </div>
     </div>
 </nav>
