@@ -76,7 +76,7 @@ button.btn-outline-success.searchbtn {
     background-color: #f9bc50;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -212,7 +212,7 @@ button.btn-outline-success.searchbtn {
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
-    color: white;
+    color: black;
 }
 
 .register-btn {
@@ -419,7 +419,7 @@ button.btn-outline-success.searchbtn {
     padding: 8px;
     border: 2px solid #38363654;
     border-radius: 6px;
-    width: 30%;
+    width: 20%;
     cursor: pointer;
 }
 
