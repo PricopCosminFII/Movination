@@ -6,12 +6,9 @@ import com.movie.repository.UserDAO;
 import com.movie.service.RoleService;
 import com.movie.service.UserService;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
-@Service
 @Setter
 public class UserServiceImpl implements UserService {
 
@@ -19,13 +16,18 @@ public class UserServiceImpl implements UserService {
     RoleService roleService;
 
     @Override
-    @Transactional
     public void save(User user) {
         Role role = roleService.getByName("ROLE_USER");
+        if (role == null) {
+            role = new Role();
+            role.setName("ROLE_USER");
+            roleService.save(role);
+        }
         user.setRoles(Collections.singletonList(role));
         userDAO.save(user);
     }
 
+    @Override
     public boolean existsUserByEmail(User user) {
         return userDAO.existsUserByEmail(user.getEmail());
     }

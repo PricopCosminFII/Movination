@@ -6,4 +6,5 @@ public interface UserFacade {
     void register(UserDTO userDTO);
 
     boolean existsUserByEmail(UserDTO userDTO);
+    String validateUser(UserDTO userDTO);
 }

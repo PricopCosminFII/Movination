@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,16 +21,21 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping(value = "/register")
-    @ResponseBody
-    public String register(@RequestBody UserDTO userDTO, BindingResult bindingResult, Model model) {
-        boolean isUserRegistered = userFacade.existsUserByEmail(userDTO);
-        if (bindingResult.hasErrors() || isUserRegistered) {
-            return "index";
+    public String register(@ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
+        String error = userFacade.validateUser(userDTO);
+        if (bindingResult.hasErrors() || error != null) {
+            model.addAttribute("error", error);
         } else {
             userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
             userFacade.register(userDTO);
-            return "index";
+            return "redirect:/";
         }
+        return "register";
+    }
+
+    @GetMapping(value = "/register")
+    public String showRegister() {
+        return "register";
     }
 
     @GetMapping(path = "/login")

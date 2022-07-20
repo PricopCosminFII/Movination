@@ -5,8 +5,10 @@ import com.movie.dto.UserDTO;
 import com.movie.facade.UserFacade;
 import com.movie.service.UserService;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 @Setter
+@Transactional
 public class UserFacadeImpl implements UserFacade {
 
     UserConverter userConverter;
@@ -20,5 +22,18 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean existsUserByEmail(UserDTO userDTO) {
         return userService.existsUserByEmail(userConverter.convert(userDTO));
+    }
+
+    @Override
+    public String validateUser(UserDTO userDTO) {
+        boolean isUserRegistered = userService.existsUserByEmail(userConverter.convert(userDTO));
+        boolean isPasswordCorrect = userDTO.getPassword().equals(userDTO.getConfirmPassword());
+        String error = null;
+        if (isUserRegistered) {
+            error = "There is a user with that email!";
+        } else if (!isPasswordCorrect) {
+            error = "The passwords do not match!";
+        }
+        return error;
     }
 }

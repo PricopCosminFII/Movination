@@ -1,14 +1,16 @@
 package com.movie.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private Long id;
 
@@ -20,5 +22,6 @@ public class UserDTO {
 
     private String password;
 
+    private String confirmPassword;
 
 }
