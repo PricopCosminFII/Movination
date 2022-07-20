@@ -7,7 +7,11 @@
 
 <body>
 <n:navbar/>
+
 <div class="container px-5 py-5">
+    <c:if test="${watchlistContent==null || watchlistContent.size()==0}">
+        <h1 class="no-movies"  align="center">You don't have any movies added to your watchlist yet!</h1>
+    </c:if>
     <div id="box-container" class="box-container">
         <c:choose>
         <c:when test="${watchlistContent!=null}">
@@ -19,7 +23,8 @@
                 <button type="button" id="close" class="btn-close btn-close-white remove" style="{text-align-all: left}"
                         movie="${movie.id}"></button>
                 <img src="${movie.picture}" alt="" width="200" height="300">
-                <p>${movie.name} </p>
+                <div class="movie-name"> <p>${movie.name} </p></div>
+                <div class="content-aligned">
                 <p>Movie rating:
                     <c:choose>
                         <c:when test="${movie.rating!=null&&movie.rating>0}">
@@ -39,6 +44,7 @@
                 </div>
                 <div class="btn-holder">
                     <button class="watchlist-btn" type="submit" movie="${movie.id}" rating="">Add rating</button>
+                </div>
                 </div>
             </div>
 
@@ -63,16 +69,13 @@
             </a>
         </li>
         </c:when>
-        <c:otherwise>
-            <h1 style="size: A5" align="center">You don't have any movies added to your watchlist yet!</h1>
-        </c:otherwise>
         </c:choose>
     </div>
+
 </div>
 
 <n:footer/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../../js/watchlist.js"></script>
+
 </body>
 </html>

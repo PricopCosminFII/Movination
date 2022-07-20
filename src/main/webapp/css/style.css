@@ -201,7 +201,23 @@ button.btn-outline-success.searchbtn {
     color: #f9bc50;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+.content-aligned{
+    width: 100%;
+    bottom: 0;
+    align-self:baseline;
+}
+.movie-name{
+    min-height:150px;
+}
+.no-movies {
+    position: absolute;
+    font-size: xxx-large;
+    color: #d2cccc;
+    width: max-content;
+    justify-content: center;
+    transform: translate(0, 100%);
 
+}
 .input input {
     display: block;
     height: 50px;
@@ -232,6 +248,7 @@ button.btn-outline-success.searchbtn {
 .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+    align-items: stretch;
 }
 
 .box-container .col {
