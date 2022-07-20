@@ -373,3 +373,43 @@ body {
     font-size: 17px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
+.category-menu-sub {
+    margin: 10px;
+    display: flex;
+}
+
+.category-menu-sub .categories {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    margin: auto;
+    transition: transform .2s;
+    text-align: center;
+    margin-top: 10px;
+    padding: 8px;
+    border: 2px solid #38363654;
+    border-radius: 6px;
+    width: 30%;
+    cursor: pointer;
+}
+
+.category-navbar a {
+    text-decoration: none;
+    color: #eeeeee;
+}
+
+.category-navbar span:hover {
+    background-color: #f9bc50;
+    transform: scale(1.3);
+}
+
+@media only screen and (max-width: 900px) {
+    .category-menu-sub {
+        margin: 10px;
+        display: block;
+    }
+    .categories {
+        display: flex;
+        justify-content: center;
+    }
+}

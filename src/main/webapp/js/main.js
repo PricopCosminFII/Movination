@@ -75,3 +75,13 @@ $(document).ready(function () {
     })
 })
 
+$('div.category-navbar > span').each(function(i) {
+    if(i % 10 == 0) {
+        $(this).nextAll().andSelf().slice(0, 10).wrapAll('<div class="category-menu-sub"></div>');
+    }
+});
+
+
+
+
+
