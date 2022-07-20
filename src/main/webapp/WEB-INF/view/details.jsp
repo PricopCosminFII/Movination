@@ -19,7 +19,7 @@
             </div>
             <div id="info">
                 <h1>${movieDetails.name} : ${movieDetails.year}</h1>
-                <h5> Movination Note: ${movieDetails.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i>
+                <h5> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i>
                 </h5>
                 <h4><p>Runtime: ${movieDetails.minutes} min <c:forEach items="${moviecategory}"
                                                                        var="category">${category.name}/</c:forEach></p>
