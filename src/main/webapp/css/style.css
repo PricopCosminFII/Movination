@@ -35,6 +35,36 @@ body {
     margin-top: auto;
 }
 
+.custom-search {
+    position: relative;
+    width: 300px;
+}
+
+.form-control.me-2 {
+    border-radius: 25px;
+    padding: 10px 100px 10px 20px;
+    line-height: 1;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+button.btn-outline-success.searchbtn {
+    position: absolute;
+    right: 13px;
+    top: 3px;
+    bottom: 3px;
+    border: 0;
+    background: #5e5d5b;
+    color: #fff;
+    outline: none;
+    margin: 0;
+    padding: 0 10px;
+    border-radius: 100px;
+    z-index: 2;
+}
+
 /*Movie details*/
 .addlist {
     padding: 1.3em 3em;
