@@ -5,6 +5,10 @@
 <%@include file="/WEB-INF/tags/head.tag" %>
 <body>
 <n:navbar/>
+
+<n:category>
+
+</n:category>
 <div class="container px-5 py-5">
     <div id="box-container" class="box-container">
         <c:forEach items="${movies}" var="movie">

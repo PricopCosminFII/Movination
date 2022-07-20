@@ -28,8 +28,10 @@ public class HomepageController {
 
     @GetMapping(path = "/")
     public String showHomepage(ModelMap model) {
-        List<MovieDTO> list = movieFacade.getAllMovies();
-        model.addAttribute("movies", list);
+        List<MovieDTO> movies = movieFacade.getAllMovies();
+        List<CategoryDTO> categories = categoryFacade.getAllCategories();
+        model.addAttribute("movies", movies);
+        model.addAttribute("categories", categories);
         return "index";
     }
 
