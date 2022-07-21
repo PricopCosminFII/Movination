@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%@include file="/WEB-INF/tags/head.tag" %>
@@ -30,8 +31,18 @@
                         </h5>
                     </c:otherwise>
                 </c:choose>
-                <h4><p>Runtime: ${movieDetails.minutes} min <c:forEach items="${moviecategory}"
-                                                                       var="category">${category.name}/</c:forEach></p>
+                <h4><p>Runtime: ${movieDetails.minutes} min </p>
+                    <p> <c:forEach items="${moviecategory}" var="category" varStatus="status">
+                        <c:choose>
+                            <c:when test="${status.count < fn:length(moviecategory)}">
+                                ${category.name} /
+                            </c:when>
+                            <c:otherwise>
+                                ${category.name}
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    </p>
                 </h4>
                 <p>${movieDetails.description}</p>
                 <c:choose>
