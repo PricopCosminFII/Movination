@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 @Setter
@@ -25,6 +28,9 @@ public class UserController {
         String error = userFacade.validateUser(userDTO);
         if (bindingResult.hasErrors() || error != null) {
             model.addAttribute("error", error);
+            model.addAttribute("firstname", userDTO.getFirstName());
+            model.addAttribute("lastname", userDTO.getLastName());
+            model.addAttribute("email", userDTO.getEmail());
         } else {
             userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
             userFacade.register(userDTO);
@@ -39,10 +45,27 @@ public class UserController {
     }
 
     @GetMapping(path = "/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
-        if (error != null) {
-            model.addAttribute("error", "Invalid username or password!");
-        }
-        return "login";
+    public String login(@RequestParam(value = "error", required = false) String error, HttpServletRequest request, Model model) {
+       if (error != null) {
+           model.addAttribute("error", "Invalid username or password!");
+           setAttributeFromCookies(request, "email", "email", model);
+       }
+       return "login";
     }
+
+    public void setAttributeFromCookies(HttpServletRequest request, String parameter, String attribute, Model model) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null) {
+            for(Cookie cookie : cookies) {
+                setAttributesValueWithCookiesValue(cookie, parameter, attribute, model);
+            }
+        }
+    }
+
+    public void setAttributesValueWithCookiesValue(Cookie cookie, String parameter, String attribute, Model model) {
+        if (cookie.getName().equals(parameter)) {
+            model.addAttribute(attribute, cookie.getValue());
+        }
+    }
+
 }

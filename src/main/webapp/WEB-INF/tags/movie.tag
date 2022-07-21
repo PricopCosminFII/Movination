@@ -31,7 +31,7 @@
     <div class="pagination">
         <li class="page-item previous-page">
             <a href="javascript:void(0)" class="page-link" aria-label="Previous">
-                <span aria-hidden="true">«</span>
+                <span aria-hidden="true">&#171;</span>
             </a>
         </li>
         <li class="page-item current-page"><a class="page-link" href="#">1</a></li>
@@ -42,7 +42,7 @@
         <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
         <li class="page-item next-page">
             <a href="javascript:void(0)" class="page-link" aria-label="Next">
-                <span aria-hidden="true">»</span>
+                <span aria-hidden="true">&#187;</span>
             </a>
         </li>
     </div>

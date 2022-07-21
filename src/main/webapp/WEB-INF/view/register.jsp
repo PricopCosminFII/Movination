@@ -17,20 +17,17 @@
     <form:form method="post" action="register" id="registerform">
     <div class="form-content">
         <h1 class="heading">Register</h1>
-        <c:if test="${not empty error}">
-            <div class="error">${error}</div>
-        </c:if>
         <div class="input">
             <label for="firstname">First name:</label>
-            <input type="text" class="form-control" id="firstname" placeholder="Enter first name" name="firstName" required>
+            <input value="${firstname}" type="text" class="form-control" id="firstname" placeholder="Enter first name" name="firstName" required>
         </div>
         <div class="input">
             <label for="lastname">Last name:</label>
-            <input type="text" class="form-control" id="lastname" placeholder="Enter last name" name="lastName" required>
+            <input value="${lastname}" type="text" class="form-control" id="lastname" placeholder="Enter last name" name="lastName" required>
         </div>
         <div class="input">
             <label for="email">Email:</label>
-            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email" placeholder="Enter email" name="email" required>
+            <input value="${email}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email" placeholder="Enter email" name="email" required>
         </div>
         <div class="input">
             <label for="password">Password:</label>
@@ -41,6 +38,9 @@
             <input type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" class="form-control" id="confirm_password" placeholder="Repeat password" name="confirmPassword" required>
         </div>
         <div class="divider"></div>
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+        </c:if>
         <button class="register-btn" type="submit">Register</button>
     </div>
     </form:form>
