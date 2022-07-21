@@ -7,13 +7,22 @@
 
                 <div class="content">
                     <div class="movie-name">${movie.name}</div>
-                <div class="content-aligned">
-                <div class="movie-rating">
-                    <p>Movie rating: ${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i> </p></div>
-                <div class="btn-holder">
-                    <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
-                </div>
-                </div>
+                    <div class="content-aligned">
+                        <div class="movie-rating">
+                            <c:choose>
+                                <c:when test="${movie.rating!=null && movie.rating>0}">
+                                    <p>Movie rating: ${movie.rating} <i class='fa-solid fa-star'
+                                                                        style='color: #f3da35'></i></p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>Movie rating: No rating </p>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="btn-holder">
+                            <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </c:forEach>

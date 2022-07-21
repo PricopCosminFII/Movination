@@ -19,8 +19,17 @@
             </div>
             <div id="info">
                 <h1>${movieDetails.name} : ${movieDetails.year}</h1>
-                <h5> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i>
-                </h5>
+                <c:choose>
+                    <c:when test="${movieDetails.rating!=null&&movieDetails.rating>0}">
+                        <h5> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star'
+                                                                     style='color: #f3da35'></i>
+                        </h5>
+                    </c:when>
+                    <c:otherwise>
+                        <h5> Movie rating: No rating
+                        </h5>
+                    </c:otherwise>
+                </c:choose>
                 <h4><p>Runtime: ${movieDetails.minutes} min <c:forEach items="${moviecategory}"
                                                                        var="category">${category.name}/</c:forEach></p>
                 </h4>
