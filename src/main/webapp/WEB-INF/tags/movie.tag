@@ -27,6 +27,7 @@
             </div>
         </c:forEach>
     </div>
+    <c:if test="${movies != null}">
     <div class="pagination">
         <li class="page-item previous-page">
             <a href="javascript:void(0)" class="page-link" aria-label="Previous">
@@ -45,4 +46,5 @@
             </a>
         </li>
     </div>
+    </c:if>
 </div>

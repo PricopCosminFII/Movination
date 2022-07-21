@@ -35,8 +35,6 @@ public class MessageConstants {
     public final static String LIST_CATEGORY_DTO_NULL = "List of CategoryDTO objects cannot be null or empty!";
     public final static String RATING_NULL = "Rating cannot be null!";
     public final static String NO_USER_FOUND = "No user found with this email: ";
-    public final static String REDIRECT_TO_LOGIN = "/login";
-    public final static String REDIRECT_TO_HOME = "/";
     public final static String SUCCESS = "success";
     public final static String USER_IS_ANONYMOUS = "anonymousUser";
 
