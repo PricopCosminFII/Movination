@@ -94,4 +94,14 @@ public class MovieFacadeImpl implements MovieFacade {
     public MovieDTO getById(Long id) {
         return movieConverter.convert(movieService.getById(id));
     }
+
+    @Override
+    public List<MovieDTO> getMovieBySearch(String search) throws ObjectNotFound{
+        List<Movie> movies = movieService.getMovieBySearch(search);
+        if (movies.isEmpty() || search.isEmpty())
+        {
+            throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
+        }
+        return getMovieDTOS(movies);
+    }
 }

@@ -21,4 +21,6 @@ public interface MovieService {
     Movie getMovieByItemId(Long id) throws ObjectNotFound;
 
     Movie getById(Long id);
+
+    List<Movie> getMovieBySearch(String search) throws ObjectNotFound;
 }

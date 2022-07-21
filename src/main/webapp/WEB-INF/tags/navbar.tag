@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <nav class="navbar  navbar-dark navbar-expand-lg bg-dark" id="navbar">
     <div class="container-fluid">
@@ -38,10 +39,10 @@
                 </c:choose>
             </ul>
             <div class="custom-search">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form:form class="d-flex" role="search" method="get" action="search" id="searchform">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchTerm">
                 <button class="fa btn btn-outline-success searchbtn" type="submit">&#xf002</button>
-            </form>
+            </form:form>
             </div>
         </div>
     </div>

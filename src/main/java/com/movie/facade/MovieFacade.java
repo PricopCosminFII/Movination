@@ -19,4 +19,6 @@ public interface MovieFacade {
     void addCategoriesToMovie(MovieDTO movieDTO, List<CategoryDTO> categoryDTOS) throws ObjectNull, RequiredFieldNull, ObjectNotFound, ObjectAlreadyExists;
 
     MovieDTO getById(Long id);
+
+    List<MovieDTO> getMovieBySearch(String search) throws ObjectNotFound;
 }

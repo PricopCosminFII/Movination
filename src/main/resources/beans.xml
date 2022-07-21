@@ -36,6 +36,9 @@
     <bean id="watchlistController" class="com.movie.controller.WatchlistController">
         <property name="watchlistFacade" ref="watchlistFacade"/>
     </bean>
+    <bean id="searchController" class="com.movie.controller.SearchController">
+        <property name="movieFacade" ref="movieFacade"/>
+    </bean>
 
     <!--- Service -->
     <bean id="roleService" class="com.movie.service.impl.RoleServiceImpl">

@@ -65,6 +65,12 @@ button.btn-outline-success.searchbtn {
     z-index: 2;
 }
 
+.search-text-info{
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+}
+
 /*Movie details*/
 .addlist {
     padding: 1.3em 3em;

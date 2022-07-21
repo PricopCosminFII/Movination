@@ -95,4 +95,13 @@ public class MovieServiceImpl implements MovieService {
             }
         }
     }
+
+    @Override
+    public List<Movie> getMovieBySearch(String search) throws ObjectNotFound {
+        List<Movie> movies = movieDAO.findMoviesByNameContains(search);
+        if (movies == null) {
+            throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
+        }
+        return movies;
+    }
 }

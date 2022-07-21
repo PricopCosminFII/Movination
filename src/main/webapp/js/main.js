@@ -73,6 +73,11 @@ $(document).ready(function () {
         var datastring = 'id=' + idMovie;
         window.location.href = "details?" + datastring + "";
     })
+
+    $(document).on('submit', '#searchform', function () {
+        var searchTerm = 'searchTerm=' + $(this).serialize();
+        window.location.href = "search?" + searchTerm + "";
+    })
 })
 
 $('div.category-navbar > span').each(function(i) {
