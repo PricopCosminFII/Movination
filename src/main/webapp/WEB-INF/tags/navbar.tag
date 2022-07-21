@@ -14,6 +14,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li>
+                    <c:if test="${cookie['name'].getValue()!=null}">
+                        <div class="nav-link welcome" id="welcome">Hello, ${cookie['name'].getValue()}!</div>
+                    </c:if>
+                    <c:if test="${cookie['name'].getValue()==null && name!=null}">
+                        <div class="nav-link welcome" id="welcome">Hello, ${name}!</div>
+                    </c:if>
+                </li>
                 <li class="nav-watchlistItem">
                     <a class="nav-link" href="<spring:url value='/' />">Home</a>
                 </li>
@@ -33,11 +41,14 @@
                     </c:when>
                     <c:otherwise>
                         <li class="nav-watchlistItem">
-                            <a class="nav-link" href="<spring:url value='/j_spring_security_logout' />">Logout</a>
+                            <a class="nav-link" id="logout" href="<spring:url value='/j_spring_security_logout' />">Logout</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
+
             </ul>
+
+
             <div class="custom-search">
             <form:form class="d-flex" role="search" method="get" action="search" id="searchform">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchTerm">

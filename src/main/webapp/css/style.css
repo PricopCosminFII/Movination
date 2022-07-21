@@ -28,6 +28,17 @@ body {
 .navbar-dark .navbar-nav .nav-link {
     font-family: 'Anton', sans-serif;
     color: #f9bc50;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+
+#welcome:hover {
+    color: #6b818a;
+}
+#welcome{
+    color: #6b818a;
 }
 
 .footer-dark {
@@ -207,23 +218,39 @@ button.btn-outline-success.searchbtn {
     color: #f9bc50;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-.content-aligned{
+
+.content-aligned {
     width: 100%;
     bottom: 0;
-    align-self:baseline;
+    align-self: baseline;
 }
-.movie-name{
-    min-height:150px;
+
+.movie-name {
+    min-height: 150px;
 }
+
+/*.welcome{*/
+/*    font-size: large;*/
+/*    color: #d2cccc;*/
+/*    justify-content: center;*/
+/*    font-family: 'Anton', sans-serif;*/
+/*    color: #f9bc50;*/
+/*    transform: translate(-70%,100%);*/
+
+/*}*/
+.movination {
+    color: #4c5c64;
+}
+
 .no-movies {
-    position: absolute;
+    position: relative;
     font-size: xxx-large;
     color: #d2cccc;
-    width: max-content;
     justify-content: center;
-    transform: translate(0, 100%);
+    transform: translate(0, 80%);
 
 }
+
 .input input {
     display: block;
     height: 50px;
@@ -461,6 +488,7 @@ button.btn-outline-success.searchbtn {
         margin: 10px;
         display: block;
     }
+
     .categories {
         display: flex;
         justify-content: center;

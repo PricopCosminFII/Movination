@@ -32,4 +32,11 @@ public class UserServiceImpl implements UserService {
         return userDAO.existsUserByEmail(user.getEmail());
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        if (email != null)
+            return userDAO.findUserByEmail(email);
+        return null;
+    }
+
 }
