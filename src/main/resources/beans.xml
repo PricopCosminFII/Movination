@@ -21,6 +21,7 @@
         <property name="movieFacade" ref="movieFacade"/>
         <property name="categoryFacade" ref="categoryFacade"/>
         <property name="watchlistItemFacade" ref="watchlistItemFacade"/>
+        <property name="userFacade" ref="userFacade"/>
     </bean>
     <bean id="movieController" class="com.movie.controller.MovieController">
         <property name="objectMapper" ref="objectMapper"/>

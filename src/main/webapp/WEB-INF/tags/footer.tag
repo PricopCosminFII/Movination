@@ -34,4 +34,5 @@
             crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="../../js/watchlist.js"></script>
+    <script src="../../js/removeNameCookie.js"></script>
 </div>

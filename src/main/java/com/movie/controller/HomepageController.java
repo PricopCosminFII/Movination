@@ -7,6 +7,7 @@ import com.movie.exception.ObjectNotFound;
 import com.movie.exception.ObjectNull;
 import com.movie.facade.CategoryFacade;
 import com.movie.facade.MovieFacade;
+import com.movie.facade.UserFacade;
 import com.movie.facade.WatchlistItemFacade;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -16,22 +17,34 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
 @Setter
 public class HomepageController {
-
+    UserFacade userFacade;
     MovieFacade movieFacade;
     CategoryFacade categoryFacade;
     WatchlistItemFacade watchlistItemFacade;
 
     @GetMapping(path = "/")
-    public String showHomepage(ModelMap model) {
+    public String showHomepage(ModelMap model, Authentication authentication, HttpServletResponse response) {
         List<MovieDTO> movies = movieFacade.getAllMovies();
         List<CategoryDTO> categories = categoryFacade.getAllCategories();
         model.addAttribute("movies", movies);
         model.addAttribute("categories", categories);
+        if (authentication != null) {
+            UserDTO user = userFacade.getUserByEmail(authentication.getName());
+            if (user != null) {
+                Cookie cookie = new Cookie("name", user.getFirstName());
+                cookie.setPath("/");
+                response.addCookie(cookie);
+                model.addAttribute("name", user.getFirstName());
+            }
+        }
+
         return "index";
     }
 

@@ -3,6 +3,7 @@ package com.movie.facade.impl;
 import com.movie.converter.UserConverter;
 import com.movie.dto.UserDTO;
 import com.movie.facade.UserFacade;
+import com.movie.model.User;
 import com.movie.service.UserService;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +36,13 @@ public class UserFacadeImpl implements UserFacade {
             error = "The passwords do not match!";
         }
         return error;
+    }
+
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null)
+            return userConverter.convert(user);
+        return null;
     }
 }
