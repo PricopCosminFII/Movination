@@ -47,12 +47,10 @@ $(document).on('click', '.watchlist-btn', function (event) {
 $(document).on('click', '#addMovie', function (event) {
     event.preventDefault()
     let movieId = event.target.getAttribute("movie");
-    alert(movieId)
     $.ajax({
         url: LOCALHOST_URL + '/watchlist/add/movie?' + 'id=' + movieId,
         type: 'post',
         success: function (response) {
-            alert(response)
             if (response === "success")
                 location.reload()
             else

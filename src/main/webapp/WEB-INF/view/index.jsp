@@ -10,7 +10,6 @@
 
 </n:category>
 <n:movie/>
-
 <n:footer/>
 </body>
 </html>
