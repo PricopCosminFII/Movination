@@ -31,12 +31,37 @@ $(".watchlist_movie").each(function () {
 $(document).on('click', '.watchlist-btn', function (event) {
     let rate = parseFloat(event.target.getAttribute("rating"));
     let movieId = event.target.getAttribute("movie");
+    let name=event.target.getAttribute("name-movie")
     $.ajax({
         url: LOCALHOST_URL + '/watchlist/rate/movie?' + 'rating=' + rate + '&id=' + movieId,
         type: 'post',
         success: function (response) {
-            if (response === "success")
-                location.reload()
+
+            if (response === "success") {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                Command: toastr["success"](" ", "You rated "+name+" with "+rate+" stars!")
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1600);
+
+            }
             else
                 window.location.replace(LOCALHOST_URL + response)
         }
