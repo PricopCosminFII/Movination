@@ -33,6 +33,7 @@
     </bean>
     <bean id="watchlistItemController" class="com.movie.controller.WatchlistItemController">
         <property name="watchlistItemFacade" ref="watchlistItemFacade"/>
+        <property name="userFacade" ref="userFacade"/>
     </bean>
     <bean id="watchlistController" class="com.movie.controller.WatchlistController">
         <property name="watchlistFacade" ref="watchlistFacade"/>

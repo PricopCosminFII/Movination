@@ -6,6 +6,7 @@ import com.movie.dto.MovieDTO;
 import com.movie.dto.UserDTO;
 import com.movie.dto.WatchlistItemDTO;
 import com.movie.exception.*;
+import com.movie.facade.UserFacade;
 import com.movie.facade.WatchlistItemFacade;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
@@ -13,12 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
 @Setter
 public class WatchlistItemController {
     private WatchlistItemFacade watchlistItemFacade;
+    private UserFacade userFacade;
 
     @PostMapping("/watchlist/rate/movie")
     @ResponseBody
@@ -37,12 +41,14 @@ public class WatchlistItemController {
     }
 
     @GetMapping("/watchlist")
-    public String getWatchlistContent(ModelMap modelMap, Authentication authentication) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
-        String email = authentication.getName();
-        UserDTO userDTO = new UserDTO();
-        userDTO.setEmail(email);
-        Map<MovieDTO, WatchlistItemDTO> watchlistContent = watchlistItemFacade.getContentOfWatchlist(userDTO);
-        modelMap.addAttribute("watchlistContent", watchlistContent);
+    public String getWatchlistContent(ModelMap model, Authentication authentication, HttpServletResponse response) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
+        UserDTO user = userFacade.getUserByEmail(authentication.getName());
+        Cookie cookie = new Cookie("name", user.getFirstName());
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        model.addAttribute("name", user.getFirstName());
+        Map<MovieDTO, WatchlistItemDTO> watchlistContent = watchlistItemFacade.getContentOfWatchlist(user);
+        model.addAttribute("watchlistContent", watchlistContent);
         return "watchlist";
     }
 

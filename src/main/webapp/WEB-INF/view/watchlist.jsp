@@ -43,7 +43,7 @@
                     </c:forEach>
                 </div>
                 <div class="btn-holder">
-                    <button class="watchlist-btn" type="submit" movie="${movie.id}" rating="">Add rating</button>
+                    <button class="watchlist-btn" type="submit" movie="${movie.id}" rating="" name-movie="${movie.name}">Add rating</button>
                 </div>
                 </div>
             </div>
