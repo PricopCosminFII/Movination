@@ -19,19 +19,21 @@
                 <img id="poster" src="${movieDetails.picture}" alt="img">
             </div>
             <div id="info">
-                <h1>${movieDetails.name} : ${movieDetails.year}</h1>
-                <c:choose>
-                    <c:when test="${movieDetails.rating!=null&&movieDetails.rating>0}">
-                        <h5> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star'
-                                                                     style='color: #f3da35'></i>
-                        </h5>
-                    </c:when>
-                    <c:otherwise>
-                        <h5> Movie rating: No rating
-                        </h5>
-                    </c:otherwise>
-                </c:choose>
-                <h4><p>Runtime: ${movieDetails.minutes} min </p>
+                <h2>${movieDetails.name}</h2>
+                <h5>
+                    <c:choose>
+                        <c:when test="${movieDetails.rating!=null&&movieDetails.rating>0}">
+                            <p> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star'
+                                                                         style='color: #f3da35'></i>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p> Movie rating: No rating
+                            </p>
+                        </c:otherwise>
+                    </c:choose>
+                    <p>Year: ${movieDetails.year}</p>
+                    <p>Runtime: ${movieDetails.minutes} min </p>
                     <p> <c:forEach items="${moviecategory}" var="category" varStatus="status">
                         <c:choose>
                             <c:when test="${status.count < fn:length(moviecategory)}">
@@ -43,7 +45,7 @@
                         </c:choose>
                     </c:forEach>
                     </p>
-                </h4>
+                </h5>
                 <p>${movieDetails.description}</p>
                 <c:choose>
                     <c:when test="${isInWatchlist==true}">
