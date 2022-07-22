@@ -142,16 +142,16 @@ button.btn-outline-success.searchbtn {
     background-color: #fff;
 }
 
-#info > h1 {
-    font-size: 40px;
+#info > h2 {
+    font-size: 27px;
     letter-spacing: 2px;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
     font-family: 'Anton', sans-serif;
 }
 
-#info > h4 {
+#info > h5 {
     letter-spacing: 3px;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
     border-bottom: 2px solid #000;
     box-sizing: border-box;
     color: #2ecc71;
