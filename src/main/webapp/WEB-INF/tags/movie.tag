@@ -27,6 +27,14 @@
             </div>
         </c:forEach>
     </div>
+
+    <c:if test="${error != null}">
+        <div class="request-error" id="request-error">${error}</div>
+        <div class="peep">
+            <img src="/images/peep.png" width="250" height="350" alt="">
+        </div>
+    </c:if>
+
     <c:if test="${movies != null}">
     <div class="pagination">
         <li class="page-item previous-page">

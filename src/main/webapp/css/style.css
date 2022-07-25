@@ -498,3 +498,17 @@ button.btn-outline-success.searchbtn {
         justify-content: center;
     }
 }
+
+.request-error {
+    font-size: 25px;
+    text-align: center;
+    color: #fff;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    cursor: default;
+}
+
+.peep {
+    text-align: center;
+    cursor: pointer
+}

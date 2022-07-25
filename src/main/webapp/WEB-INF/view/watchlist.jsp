@@ -10,7 +10,7 @@
 
 <div class="container px-5 py-5">
     <c:if test="${watchlistContent==null || watchlistContent.size()==0}">
-        <h1 class="no-movies"  align="center">You don't have any movies added to your watchlist yet!</h1>
+        <div class="request-error" id="request-error">You don't have any movies added to your watchlist yet!</div>
     </c:if>
     <div id="box-container" class="box-container">
         <c:choose>

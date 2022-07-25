@@ -1,5 +1,7 @@
 package com.movie.controller;
 
+import com.google.protobuf.Message;
+import com.movie.constants.MessageConstants;
 import com.movie.dto.CategoryDTO;
 import com.movie.dto.MovieDTO;
 import com.movie.dto.UserDTO;
@@ -69,6 +71,24 @@ public class HomepageController {
             return "redirect:/";
         } catch (ObjectNotFound objectNotFound) {
             return "details";
+        }
+    }
+
+    @SneakyThrows
+    @GetMapping(path = "/category")
+    public String getMoviesByCategory(@RequestParam String name, ModelMap model) {
+        try {
+            CategoryDTO categoryDTO = categoryFacade.getCategoryByName(name);
+            List<CategoryDTO> categories = categoryFacade.getAllCategories();
+            List<MovieDTO> movieDTOS = movieFacade.getMoviesByCategory(categoryDTO);
+            if(movieDTOS == null) {
+                model.addAttribute("error", MessageConstants.NO_MOVIES_FOR_CATEGORY);
+            }
+            model.addAttribute("movies", movieDTOS);
+            model.addAttribute("categories", categories);
+            return "index";
+        } catch (ObjectNull objectNull) {
+            return "redirect:/";
         }
     }
 }

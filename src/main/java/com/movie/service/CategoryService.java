@@ -12,4 +12,6 @@ public interface CategoryService {
     List<Category> getCategoriesByMovieName(Long idMovie) throws ObjectNotFound;
 
     List<Category> getAllCategories();
+
+    Category getCategoryByName(String name);
 }
