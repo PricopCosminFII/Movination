@@ -15,4 +15,6 @@ public interface CategoryFacade {
     List<CategoryDTO> getAllCategories();
 
     List<CategoryDTO> getAllCategoriesFromMovie(MovieDTO movieDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull;
+
+    CategoryDTO getCategoryByName(String name);
 }

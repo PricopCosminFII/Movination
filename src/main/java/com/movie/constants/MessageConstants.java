@@ -37,5 +37,5 @@ public class MessageConstants {
     public final static String NO_USER_FOUND = "No user found with this email: ";
     public final static String SUCCESS = "success";
     public final static String USER_IS_ANONYMOUS = "anonymousUser";
-
+    public final static String NO_MOVIES_FOR_CATEGORY = "SORRY, NO MOVIES WERE FOUND FOR THIS CATEGORY";
 }

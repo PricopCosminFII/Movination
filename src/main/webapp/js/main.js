@@ -86,6 +86,12 @@ $('div.category-navbar > span').each(function(i) {
     }
 });
 
+$(document).on('click', '.categories', function(event) {
+    event.preventDefault()
+    var categoryName = $(this).text();
+    var dataString = 'name=' + categoryName;
+    window.location.href = "category?" + dataString + "";
+});
 
 
 

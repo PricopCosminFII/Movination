@@ -5,7 +5,7 @@
 
 <nav class="navbar  navbar-dark navbar-expand-lg bg-dark" id="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="" id="logo">
+        <a class="navbar-brand" href="<spring:url value='/' />" id="logo">
             <img src="images/logomovie.png" width="120" height="120" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

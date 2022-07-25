@@ -56,4 +56,9 @@ public class CategoryFacadeImpl implements CategoryFacade {
             throw new RequiredFieldNull(MessageConstants.ID_FIELD_OF_MOVIE_DTO_NULL);
         return getCategoryDTOS(categoryService.getCategoriesByMovieName(movieDTO.getId()));
     }
+
+    @Override
+    public CategoryDTO getCategoryByName(String name) {
+        return categoryConverter.convert(categoryService.getCategoryByName(name));
+    }
 }
