@@ -45,7 +45,13 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
-
+                <c:if test="${not empty pageContext.request.userPrincipal}">
+                    <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
+                        <li class="nav-watchlistItem">
+                            <a class="nav-link" id="admin" href="<spring:url value='/admin' />">Admin</a>
+                        </li>
+                    </c:if>
+                </c:if>
             </ul>
 
 

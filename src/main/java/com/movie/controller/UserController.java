@@ -1,5 +1,6 @@
 package com.movie.controller;
 
+import com.movie.constants.MessageConstants;
 import com.movie.dto.UserDTO;
 import com.movie.facade.UserFacade;
 import lombok.Setter;
@@ -47,7 +48,7 @@ public class UserController {
     @GetMapping(path = "/login")
     public String login(@RequestParam(value = "error", required = false) String error, HttpServletRequest request, Model model) {
        if (error != null) {
-           model.addAttribute("error", "Invalid username or password!");
+           model.addAttribute("error", MessageConstants.INVALID_USERNAME_OR_PASSWORD);
            setAttributeFromCookies(request, "email", "email", model);
        }
        return "login";
