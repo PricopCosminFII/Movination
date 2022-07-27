@@ -1,7 +1,7 @@
 package com.movie.controller;
 
 import com.movie.constants.MessageConstants;
-import com.movie.constants.NagivationConstants;
+import com.movie.constants.NavigationConstants;
 import com.movie.dto.MovieDTO;
 import com.movie.dto.UserDTO;
 import com.movie.dto.WatchlistItemDTO;
@@ -29,14 +29,14 @@ public class WatchlistItemController {
     public String addRatingToMovieFromWatchlist(@RequestParam Double rating, @ModelAttribute MovieDTO movieDTO, Authentication authentication) {
         try {
             if (authentication == null)
-                return NagivationConstants.REDIRECT_TO_LOGIN;
+                return NavigationConstants.REDIRECT_TO_LOGIN;
             String email = authentication.getName();
             UserDTO userDTO = new UserDTO();
             userDTO.setEmail(email);
             watchlistItemFacade.addRatingToMovieFromWatchlist(rating, movieDTO, userDTO);
             return MessageConstants.SUCCESS;
         } catch (ObjectNull | RequiredFieldNull | InvalidData | ObjectNotFound e) {
-            return NagivationConstants.REDIRECT_TO_HOME;
+            return NavigationConstants.REDIRECT_TO_HOME;
         }
     }
 
@@ -57,14 +57,14 @@ public class WatchlistItemController {
     public String removeMovieFromWatchlist(@ModelAttribute MovieDTO movieDTO, Authentication authentication) {
         try {
             if (authentication == null)
-                return NagivationConstants.REDIRECT_TO_LOGIN;
+                return NavigationConstants.REDIRECT_TO_LOGIN;
             String email = authentication.getName();
             UserDTO userDTO = new UserDTO();
             userDTO.setEmail(email);
             watchlistItemFacade.removeMovieFromWatchlist(movieDTO, userDTO);
             return MessageConstants.SUCCESS;
         } catch (ObjectNull | RequiredFieldNull | ObjectNotFound e) {
-            return NagivationConstants.REDIRECT_TO_HOME;
+            return NavigationConstants.REDIRECT_TO_HOME;
         }
     }
 
@@ -73,14 +73,14 @@ public class WatchlistItemController {
     public String addMovieToWatchlist(@ModelAttribute MovieDTO movieDTO, Authentication authentication) {
         try {
             if (authentication == null)
-                return NagivationConstants.REDIRECT_TO_LOGIN;
+                return NavigationConstants.REDIRECT_TO_LOGIN;
             String email = authentication.getName();
             UserDTO userDTO = new UserDTO();
             userDTO.setEmail(email);
             watchlistItemFacade.addMovieToWatchlist(movieDTO, userDTO);
             return MessageConstants.SUCCESS;
         } catch (ObjectNull | RequiredFieldNull | ObjectNotFound | ObjectAlreadyExists e) {
-            return NagivationConstants.REDIRECT_TO_HOME;
+            return NavigationConstants.REDIRECT_TO_HOME;
         }
     }
 

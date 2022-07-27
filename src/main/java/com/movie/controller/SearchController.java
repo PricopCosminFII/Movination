@@ -1,6 +1,6 @@
 package com.movie.controller;
 
-import com.movie.constants.NagivationConstants;
+import com.movie.constants.NavigationConstants;
 import com.movie.dto.MovieDTO;
 import com.movie.exception.ObjectNotFound;
 import com.movie.facade.MovieFacade;
@@ -26,10 +26,10 @@ public class SearchController {
             List<MovieDTO> movieBySearch = movieFacade.getMovieBySearch(searchTerm);
             model.addAttribute("movies", movieBySearch);
             model.addAttribute("count", movieBySearch.size());
-            return NagivationConstants.REDIRECT_TO_SEARCH;
+            return NavigationConstants.REDIRECT_TO_SEARCH;
         } catch (ObjectNotFound objectNotFound) {
             model.addAttribute("count", 0);
-            return NagivationConstants.REDIRECT_TO_SEARCH;
+            return NavigationConstants.REDIRECT_TO_SEARCH;
         }
     }
 }
