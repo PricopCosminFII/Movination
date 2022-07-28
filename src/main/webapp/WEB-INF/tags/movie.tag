@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container px-5 py-5">
-    <div id="box-container" class="box-container">
+    <div id="box-container" class="box-container justify-content-center">
         <c:forEach items="${movies}" var="movie">
             <div id="col" class="col mx-2">
                 <img src="${movie.picture}" alt="" width="200" height="300">
