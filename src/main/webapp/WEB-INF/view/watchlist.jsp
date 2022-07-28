@@ -12,7 +12,7 @@
     <c:if test="${watchlistContent==null || watchlistContent.size()==0}">
         <div class="request-error" id="request-error">You don't have any movies added to your watchlist yet!</div>
     </c:if>
-    <div id="box-container" class="box-container">
+    <div id="box-container" class="box-container justify-content-center">
         <c:choose>
         <c:when test="${watchlistContent!=null}">
         <c:forEach items="${watchlistContent}" var="item">
