@@ -59,6 +59,26 @@
             </div>
         </div>
     </div>
+    <div class="recommendation">
+        <c:if test="${moviesRecommendation.size()!=0}">
+            <h3>Featured movies with the same categories as "${movieDetails.name}" </h3>
+        </c:if>
+    </div>
+    <div class="hero-section animate__animated animate__slideInLeft">
+    <c:forEach items="${moviesRecommendation}" var="movie" varStatus="status">
+        <c:if test="${status.count <= 3 && fn:length(moviesRecommendation) >=status.count}">
+        <div class="card-grid col mx-2">
+            <div class="card-movie">
+                <div class="card__background" style="background-image: url(${movie.picture})"></div>
+                <div class="card__content">
+                    <h3 class="card__heading">${movie.name}</h3>
+                    <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
+                </div>
+            </div>
+        </div>
+    </c:if>
+    </c:forEach>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../js/watchlist.js"></script>

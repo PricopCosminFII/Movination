@@ -1,6 +1,7 @@
 package com.movie.facade.impl;
 
 import com.movie.constants.MessageConstants;
+import com.movie.converter.CategoryConverter;
 import com.movie.converter.MovieConverter;
 import com.movie.dto.CategoryDTO;
 import com.movie.dto.MovieDTO;
@@ -13,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Setter
@@ -22,7 +23,6 @@ import java.util.List;
 public class MovieFacadeImpl implements MovieFacade {
     private MovieService movieService;
     private MovieConverter movieConverter;
-
     @Override
     public void save(MovieDTO movieDTO) throws ObjectNull, RequiredFieldNull, ObjectAlreadyExists, InvalidData {
         if (movieDTO == null)
@@ -103,5 +103,19 @@ public class MovieFacadeImpl implements MovieFacade {
             throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
         }
         return getMovieDTOS(movies);
+    }
+
+    @Override
+    public List<MovieDTO> getMovieRecommendation(List<CategoryDTO> categoryDTOList, MovieDTO movieDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
+        List<MovieDTO> moviesFromAllCategory = new ArrayList<>();
+        for(CategoryDTO categoryDTO:categoryDTOList){
+            List<MovieDTO> moviesFromCategory = getMoviesByCategory(categoryDTO);
+            moviesFromAllCategory.addAll(moviesFromCategory);
+        }
+        List<MovieDTO> movieRecommendation = moviesFromAllCategory.stream().distinct().collect(Collectors.toList());
+        movieRecommendation.remove(movieDTO);
+        movieRecommendation.removeIf(movieWithoutRating -> movieWithoutRating.getRating()==null);
+        movieRecommendation.sort(Comparator.comparing(MovieDTO::getRating).reversed());
+        return movieRecommendation;
     }
 }

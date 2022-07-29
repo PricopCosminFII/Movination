@@ -2,6 +2,7 @@ package com.movie.controller;
 
 import com.google.protobuf.Message;
 import com.movie.constants.MessageConstants;
+import com.movie.constants.NavigationConstants;
 import com.movie.dto.CategoryDTO;
 import com.movie.dto.MovieDTO;
 import com.movie.dto.UserDTO;
@@ -21,7 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @Setter
@@ -59,6 +64,8 @@ public class HomepageController {
             model.addAttribute("movieDetails", movieDTO);
             List<CategoryDTO> categoryDTOS = categoryFacade.getAllCategoriesFromMovie(movieDTO);
             model.addAttribute("moviecategory", categoryDTOS);
+            List<MovieDTO> movieRecommendation = movieFacade.getMovieRecommendation(categoryDTOS,movieDTO);
+            model.addAttribute("moviesRecommendation",movieRecommendation);
             if (authentication != null) {
                 String email = authentication.getName();
                 UserDTO userDTO = new UserDTO();
@@ -66,11 +73,11 @@ public class HomepageController {
                 if (watchlistItemFacade.isInWatchlistOfUser(userDTO, movieDTO))
                     model.addAttribute("isInWatchlist", true);
             }
-            return "details";
+            return NavigationConstants.REDIRECT_TO_DETAILS;
         } catch (ObjectNull objectNull) {
-            return "redirect:/";
+            return NavigationConstants.REDIRECT_TO_HOME;
         } catch (ObjectNotFound objectNotFound) {
-            return "details";
+            return NavigationConstants.REDIRECT_TO_DETAILS;
         }
     }
 
