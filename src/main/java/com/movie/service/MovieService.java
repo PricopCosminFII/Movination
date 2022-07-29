@@ -23,4 +23,6 @@ public interface MovieService {
     Movie getById(Long id);
 
     List<Movie> getMovieBySearch(String search) throws ObjectNotFound;
+
+    void delete(Long idMovie) throws ObjectNotFound;
 }

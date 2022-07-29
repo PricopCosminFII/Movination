@@ -104,4 +104,21 @@ public class MovieServiceImpl implements MovieService {
         }
         return movies;
     }
+
+    @Override
+    public void delete(Long idMovie) throws ObjectNotFound {
+        Movie movie=movieDAO.findMovieById(idMovie);
+        if(movie==null)
+            throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
+        List<Category> categories=movie.getCategories();
+        List<WatchlistItem> watchlistItems=movie.getWatchlistItems();
+        for(Category category:categories){
+            List<Movie> movies=category.getMovies();
+            movies.remove(movie);
+            category.setMovies(movies);
+            categoryDAO.save(category);
+        }
+        watchlistItemDAO.deleteAll(watchlistItems);
+        movieDAO.delete(movie);
+    }
 }

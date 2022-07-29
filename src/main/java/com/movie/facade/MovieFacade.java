@@ -21,6 +21,7 @@ public interface MovieFacade {
     MovieDTO getById(Long id);
 
     List<MovieDTO> getMovieBySearch(String search) throws ObjectNotFound;
+    void deleteMovie(MovieDTO movieDTO) throws ObjectNotFound;
 
     List<MovieDTO> getMovieRecommendation(List<CategoryDTO> categoryDTOList, MovieDTO movieDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull;
 }
