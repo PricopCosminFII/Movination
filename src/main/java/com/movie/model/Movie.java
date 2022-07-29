@@ -32,7 +32,7 @@ public class Movie {
     @Column
     private Double rating;
 
-    @ManyToMany(mappedBy = "movies", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "movies")
     @UniqueElements
     private List<Category> categories;
 

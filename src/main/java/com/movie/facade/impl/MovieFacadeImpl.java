@@ -1,7 +1,6 @@
 package com.movie.facade.impl;
 
 import com.movie.constants.MessageConstants;
-import com.movie.converter.CategoryConverter;
 import com.movie.converter.MovieConverter;
 import com.movie.dto.CategoryDTO;
 import com.movie.dto.MovieDTO;
@@ -23,6 +22,7 @@ import java.util.stream.Collectors;
 public class MovieFacadeImpl implements MovieFacade {
     private MovieService movieService;
     private MovieConverter movieConverter;
+
     @Override
     public void save(MovieDTO movieDTO) throws ObjectNull, RequiredFieldNull, ObjectAlreadyExists, InvalidData {
         if (movieDTO == null)
@@ -103,6 +103,12 @@ public class MovieFacadeImpl implements MovieFacade {
             throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
         }
         return getMovieDTOS(movies);
+    }
+
+    @Override
+    public void deleteMovie(MovieDTO movieDTO) throws ObjectNotFound {
+        if(movieDTO.getId()!=null)
+            movieService.delete(movieDTO.getId());
     }
 
     @Override

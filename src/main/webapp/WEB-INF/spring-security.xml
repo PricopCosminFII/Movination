@@ -9,6 +9,7 @@
     http://www.springframework.org/schema/security ">
 
     <http auto-config="true">
+        <intercept-url pattern="/movie" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/register" access="isAnonymous()"/>
         <intercept-url pattern="/watchlist" access="isAuthenticated()"/>

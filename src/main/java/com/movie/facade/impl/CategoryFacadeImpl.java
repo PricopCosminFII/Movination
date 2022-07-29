@@ -14,8 +14,7 @@ import com.movie.service.CategoryService;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Setter
 @Transactional
@@ -60,5 +59,16 @@ public class CategoryFacadeImpl implements CategoryFacade {
     @Override
     public CategoryDTO getCategoryByName(String name) {
         return categoryConverter.convert(categoryService.getCategoryByName(name));
+    }
+
+    @Override
+    public Map<MovieDTO, List<CategoryDTO>> getAllCategoriesForMovies(List<MovieDTO> movies) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
+        Map<MovieDTO, List<CategoryDTO>> moviesWithCategories = new TreeMap<>(Comparator.comparing(MovieDTO::getName));
+        if (movies != null && !movies.isEmpty()){
+            for (MovieDTO movieDTO : movies)
+                moviesWithCategories.put(movieDTO, getAllCategoriesFromMovie(movieDTO));
+            return moviesWithCategories;
+            }
+        return null;
     }
 }

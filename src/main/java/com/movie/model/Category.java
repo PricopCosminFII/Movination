@@ -24,7 +24,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @UniqueElements
     private List<Movie> movies;
 
