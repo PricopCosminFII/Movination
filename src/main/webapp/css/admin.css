@@ -1,18 +1,22 @@
-table{
+table {
     padding: 30px;
 }
-body{
+
+body {
     background-color: white;
 }
-.row-hidden{
+
+.row-hidden {
     display: none;
 }
-.paging-nav{
+
+.paging-nav {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.page-item{
+
+.page-item {
     font: bold 11px Arial;
     text-decoration: none;
     background-color: #EEEEEE;
@@ -28,19 +32,59 @@ body{
     text-align: center;
 
 }
-.add-admin{
+
+.add-admin {
     width: 8%;
 }
-.admin{
+
+.admin {
     padding: 30px;
 }
-.page-item:link{
+
+.page-item:link {
     text-decoration: none;
 }
 
-p{
+p {
     display: flex;
     justify-content: center;
 }
-.btn-admin{width:100%;
+
+.btn-admin {
+    width: 100%;
+}
+
+.modal-content {
+    text-transform: uppercase
+}
+
+.modal-header {
+    text-align: center;
+}
+
+#movieId {
+    display: none;
+}
+
+#modalTitle {
+    text-align: center;
+}
+
+.displayedMessage {
+    visibility: hidden;
+    text-align: center;
+}
+
+.dropdown {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.container-fluid label {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.saveCategory {
+    margin-top: 10px;
 }

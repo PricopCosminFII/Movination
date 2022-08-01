@@ -84,18 +84,43 @@ $('#chooseCategory')
         let category = event.target.value;
         window.location.href = "admin?name=" + category + "";
     })
-$(document).ready(function() {
-    $('#tableData').paging({limit:10});
+$(document).ready(function () {
+    $('#tableData').paging({limit: 10});
 });
 $('.delete').on('click', function (event) {
     let movieId = event.target.getAttribute("movie");
     $.ajax({
         url: LOCALHOST_URL + '/movie?' + 'id=' + movieId,
         type: 'delete',
-        success: function () {
+        success: function (response) {
 
-            location.reload()
+            if (response === "success") {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                Command: toastr["success"](" ", "Movie successfully deleted!");
 
+                setTimeout(function () {
+                    location.reload();
+                }, 1600);
+
+            } else
+                window.location.replace(LOCALHOST_URL + response)
         }
+
     });
-})
+});

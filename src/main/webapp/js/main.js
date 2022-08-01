@@ -80,13 +80,13 @@ $(document).ready(function () {
     })
 })
 
-$('div.category-navbar > span').each(function(i) {
-    if(i % 10 == 0) {
+$('div.category-navbar > span').each(function (i) {
+    if (i % 10 == 0) {
         $(this).nextAll().andSelf().slice(0, 10).wrapAll('<div class="category-menu-sub"></div>');
     }
 });
 
-$(document).on('click', '.categories', function(event) {
+$(document).on('click', '.categories', function (event) {
     event.preventDefault()
     var categoryName = $(this).text();
     var dataString = 'name=' + categoryName;

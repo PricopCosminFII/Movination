@@ -56,10 +56,11 @@
 
 
             <div class="custom-search">
-            <form:form class="d-flex" role="search" method="get" action="search" id="searchform">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchTerm">
-                <button class="fa btn btn-outline-success searchbtn" type="submit">&#xf002</button>
-            </form:form>
+                <form:form class="d-flex" role="search" method="get" action="search" id="searchform">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                           name="searchTerm">
+                    <button class="fa btn btn-outline-success searchbtn" type="submit">&#xf002</button>
+                </form:form>
             </div>
         </div>
     </div>

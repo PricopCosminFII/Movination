@@ -39,4 +39,5 @@ public class MessageConstants {
     public final static String USER_IS_ANONYMOUS = "anonymousUser";
     public final static String NO_MOVIES_FOR_CATEGORY = "SORRY, NO MOVIES WERE FOUND FOR THIS CATEGORY!";
     public final static String INVALID_USERNAME_OR_PASSWORD = "Invalid username or password!";
+    public final static String FIELD_CANNOT_BE_EMPTY = "Field cannot be empty!";
 }

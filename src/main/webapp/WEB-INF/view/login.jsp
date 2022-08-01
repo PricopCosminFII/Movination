@@ -19,7 +19,8 @@
             <h1 class="heading">Login</h1>
             <div class="input">
                 <label for="email">Email:</label>
-                <input value="${email}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" id="email"
+                <input value="${email}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                       class="form-control" id="email"
                        placeholder="Enter email" name="email" required>
             </div>
             <div class="input">

@@ -23,28 +23,30 @@
                 <button type="button" id="close" class="btn-close btn-close-white remove" style="{text-align-all: left}"
                         movie="${movie.id}"></button>
                 <img src="${movie.picture}" alt="" width="200" height="300">
-                <div class="movie-name"> <p>${movie.name} </p></div>
+                <div class="movie-name"><p>${movie.name} </p></div>
                 <div class="content-aligned">
-                <p>Movie rating:
-                    <c:choose>
-                        <c:when test="${movie.rating!=null&&movie.rating>0}">
-                            ${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i>
-                        </c:when>
-                        <c:otherwise>
-                            No rating
-                        </c:otherwise>
-                    </c:choose>
-                </p>
-                <div class="stars" movie="${movie.id}" rating="${rating!=null?rating:0}">
-                    Your rating:<br>
-                    <c:forEach var="mark" begin="1" end="5">
-                        <i class="fas fa-star" data-rate="${mark}" movie="${movie.id}"
-                           rating="${rating!=null?rating:0}"></i>
-                    </c:forEach>
-                </div>
-                <div class="btn-holder">
-                    <button class="watchlist-btn" type="submit" movie="${movie.id}" rating="" name-movie="${movie.name}">Add rating</button>
-                </div>
+                    <p>Movie rating:
+                        <c:choose>
+                            <c:when test="${movie.rating!=null&&movie.rating>0}">
+                                ${movie.rating} <i class='fa-solid fa-star' style='color: #f3da35'></i>
+                            </c:when>
+                            <c:otherwise>
+                                No rating
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
+                    <div class="stars" movie="${movie.id}" rating="${rating!=null?rating:0}">
+                        Your rating:<br>
+                        <c:forEach var="mark" begin="1" end="5">
+                            <i class="fas fa-star" data-rate="${mark}" movie="${movie.id}"
+                               rating="${rating!=null?rating:0}"></i>
+                        </c:forEach>
+                    </div>
+                    <div class="btn-holder">
+                        <button class="watchlist-btn" type="submit" movie="${movie.id}" rating=""
+                                name-movie="${movie.name}">Add rating
+                        </button>
+                    </div>
                 </div>
             </div>
 

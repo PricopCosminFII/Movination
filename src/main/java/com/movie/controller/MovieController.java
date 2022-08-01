@@ -22,15 +22,15 @@ public class MovieController {
     private ObjectMapper objectMapper;
     private MovieFacade movieFacade;
 
-    @PostMapping("/movie")
+    @PostMapping(value = "/movie", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity<String> save(@ModelAttribute MovieDTO movieDTO) throws JsonProcessingException {
+    public ResponseEntity<String> save(@RequestBody MovieDTO movieDTO) throws JsonProcessingException {
 
         try {
             movieFacade.save(movieDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(MessageConstants.SUCCESSFUL_CREATION_MOVIE);
+            return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + MessageConstants.SUCCESSFUL_CREATION_MOVIE + "\"}");
         } catch (ObjectNull | RequiredFieldNull | ObjectAlreadyExists | InvalidData e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"" + e.getMessage() + "\"}");
         }
     }
 

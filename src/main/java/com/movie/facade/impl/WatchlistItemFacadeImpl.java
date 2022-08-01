@@ -72,7 +72,7 @@ public class WatchlistItemFacadeImpl implements WatchlistItemFacade {
 
     @Override
     public Map<MovieDTO, WatchlistItemDTO> getContentOfWatchlist(UserDTO userDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
-        Map<MovieDTO, WatchlistItemDTO> watchlistContent = new TreeMap<>(Comparator.comparing(MovieDTO::getName));
+        Map<MovieDTO, WatchlistItemDTO> watchlistContent = new TreeMap<>(Comparator.comparing(MovieDTO::getId));
         if (userDTO == null)
             throw new ObjectNull(MessageConstants.USER_DTO_NULL);
         if (userDTO.getEmail() == null)

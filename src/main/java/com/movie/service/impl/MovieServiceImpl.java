@@ -4,6 +4,7 @@ import com.movie.constants.MessageConstants;
 import com.movie.exception.InvalidData;
 import com.movie.exception.ObjectAlreadyExists;
 import com.movie.exception.ObjectNotFound;
+import com.movie.exception.ObjectNull;
 import com.movie.model.Category;
 import com.movie.model.Movie;
 import com.movie.model.WatchlistItem;
@@ -107,18 +108,53 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void delete(Long idMovie) throws ObjectNotFound {
-        Movie movie=movieDAO.findMovieById(idMovie);
-        if(movie==null)
+        Movie movie = movieDAO.findMovieById(idMovie);
+        if (movie == null)
             throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
-        List<Category> categories=movie.getCategories();
-        List<WatchlistItem> watchlistItems=movie.getWatchlistItems();
-        for(Category category:categories){
-            List<Movie> movies=category.getMovies();
+        List<Category> categories = movie.getCategories();
+        List<WatchlistItem> watchlistItems = movie.getWatchlistItems();
+        for (Category category : categories) {
+            List<Movie> movies = category.getMovies();
             movies.remove(movie);
             category.setMovies(movies);
             categoryDAO.save(category);
         }
         watchlistItemDAO.deleteAll(watchlistItems);
         movieDAO.delete(movie);
+    }
+
+    @Override
+    public void update(Long id, String name, String description, Long minutes, String picture, Integer year) throws InvalidData, ObjectNotFound, ObjectNull {
+        if (id == null || name == null || description == null || minutes == null || picture == null || year == null)
+            throw new ObjectNull(MessageConstants.FIELD_CANNOT_BE_EMPTY);
+        Movie movie = movieDAO.findMovieById(id);
+        if (movie == null) throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
+        if (year != null && (year < 1800 || year > getCurrentYear()))
+            throw new InvalidData(MessageConstants.INVALID_YEAR);
+        if (minutes != null && minutes < 1)
+            throw new InvalidData(MessageConstants.INVALID_DURATION);
+        movieDAO.update(id, name, description, minutes, picture, year);
+    }
+
+    public void setCategories(Movie movie, List<Category> categories) {
+        movie.setCategories(categories);
+    }
+
+    @Override
+    public void deleteCategories(Movie movie, List<Category> categories) {
+        if (!categories.isEmpty()) {
+            for (Category category : categories) {
+                List<Movie> movies = category.getMovies();
+                if (movies.contains(movie)) {
+                    movies.remove(movie);
+                    category.setMovies(movies);
+                }
+                categoryDAO.save(category);
+            }
+            if (movie.getCategories() != null) {
+                movie.setCategories(null);
+                movieDAO.save(movie);
+            }
+        }
     }
 }

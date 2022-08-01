@@ -63,12 +63,12 @@ public class CategoryFacadeImpl implements CategoryFacade {
 
     @Override
     public Map<MovieDTO, List<CategoryDTO>> getAllCategoriesForMovies(List<MovieDTO> movies) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
-        Map<MovieDTO, List<CategoryDTO>> moviesWithCategories = new TreeMap<>(Comparator.comparing(MovieDTO::getName));
-        if (movies != null && !movies.isEmpty()){
+        Map<MovieDTO, List<CategoryDTO>> moviesWithCategories = new TreeMap<>(Comparator.comparing(MovieDTO::getId));
+        if (movies != null && !movies.isEmpty()) {
             for (MovieDTO movieDTO : movies)
                 moviesWithCategories.put(movieDTO, getAllCategoriesFromMovie(movieDTO));
             return moviesWithCategories;
-            }
+        }
         return null;
     }
 }
