@@ -6,14 +6,19 @@ import com.movie.dto.CategoryDTO;
 import com.movie.dto.MovieDTO;
 import com.movie.dto.WatchlistItemDTO;
 import com.movie.exception.*;
+import com.movie.facade.CategoryFacade;
 import com.movie.facade.MovieFacade;
 import com.movie.model.Movie;
 import com.movie.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -22,6 +27,7 @@ import java.util.stream.Collectors;
 public class MovieFacadeImpl implements MovieFacade {
     private MovieService movieService;
     private MovieConverter movieConverter;
+    private CategoryFacade categoryFacade;
 
     @Override
     public void save(MovieDTO movieDTO) throws ObjectNull, RequiredFieldNull, ObjectAlreadyExists, InvalidData {
@@ -96,10 +102,9 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    public List<MovieDTO> getMovieBySearch(String search) throws ObjectNotFound{
+    public List<MovieDTO> getMovieBySearch(String search) throws ObjectNotFound {
         List<Movie> movies = movieService.getMovieBySearch(search);
-        if (movies.isEmpty() || search.isEmpty())
-        {
+        if (movies.isEmpty() || search.isEmpty()) {
             throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
         }
         return getMovieDTOS(movies);
@@ -107,21 +112,60 @@ public class MovieFacadeImpl implements MovieFacade {
 
     @Override
     public void deleteMovie(MovieDTO movieDTO) throws ObjectNotFound {
-        if(movieDTO.getId()!=null)
+        if (movieDTO.getId() != null)
             movieService.delete(movieDTO.getId());
     }
 
     @Override
     public List<MovieDTO> getMovieRecommendation(List<CategoryDTO> categoryDTOList, MovieDTO movieDTO) throws ObjectNull, ObjectNotFound, RequiredFieldNull {
         List<MovieDTO> moviesFromAllCategory = new ArrayList<>();
-        for(CategoryDTO categoryDTO:categoryDTOList){
+        for (CategoryDTO categoryDTO : categoryDTOList) {
             List<MovieDTO> moviesFromCategory = getMoviesByCategory(categoryDTO);
             moviesFromAllCategory.addAll(moviesFromCategory);
         }
         List<MovieDTO> movieRecommendation = moviesFromAllCategory.stream().distinct().collect(Collectors.toList());
         movieRecommendation.remove(movieDTO);
-        movieRecommendation.removeIf(movieWithoutRating -> movieWithoutRating.getRating()==null);
+        movieRecommendation.removeIf(movieWithoutRating -> movieWithoutRating.getRating() == null);
         movieRecommendation.sort(Comparator.comparing(MovieDTO::getRating).reversed());
         return movieRecommendation;
+    }
+
+    @Override
+    public String validateMovie(MovieDTO movieDTO) {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        String error = null;
+        if (movieDTO.getMinutes() < 0) {
+            error = "Movie duration should be non-negative!";
+        } else if (movieDTO.getYear() < 1878 || movieDTO.getYear() > year) {
+            error = "Movie's release year should be between 1878 and current year!";
+        }
+        return error;
+    }
+
+    @Override
+    public void update(Long id, String name, String description, Long minutes, String picture, Integer year) throws InvalidData, ObjectNotFound, ObjectNull {
+        movieService.update(id, name, description, minutes, picture, year);
+    }
+
+    @Override
+    public void deleteCategories(MovieDTO movieDTO, List<CategoryDTO> categoriesDTO) {
+        Movie movie = movieService.getById(movieDTO.getId());
+        movieService.deleteCategories(movie, movie.getCategories());
+    }
+
+    @SneakyThrows
+    @Override
+    public List<CategoryDTO> setCategoriesToMovie(List<String> categories) {
+        List<CategoryDTO> categoryDTOS = new ArrayList<>();
+        for (String category : categories) {
+            if (categoryFacade.getCategoryByName(category) != null) {
+                categoryDTOS.add(categoryFacade.getCategoryByName(category));
+            } else {
+                categoryFacade.save(new CategoryDTO(category));
+                CategoryDTO newCategory = categoryFacade.getCategoryByName(category);
+                categoryDTOS.add(newCategory);
+            }
+        }
+        return categoryDTOS;
     }
 }

@@ -84,6 +84,7 @@
     <bean id="movieFacade" class="com.movie.facade.impl.MovieFacadeImpl">
         <property name="movieConverter" ref="movieConverter"/>
         <property name="movieService" ref="movieService"/>
+        <property name="categoryFacade" ref="categoryFacade"/>
     </bean>
     <bean id="categoryFacade" class="com.movie.facade.impl.CategoryFacadeImpl">
         <property name="categoryConverter" ref="categoryConverter"/>

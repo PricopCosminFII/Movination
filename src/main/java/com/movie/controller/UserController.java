@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -47,17 +47,17 @@ public class UserController {
 
     @GetMapping(path = "/login")
     public String login(@RequestParam(value = "error", required = false) String error, HttpServletRequest request, Model model) {
-       if (error != null) {
-           model.addAttribute("error", MessageConstants.INVALID_USERNAME_OR_PASSWORD);
-           setAttributeFromCookies(request, "email", "email", model);
-       }
-       return "login";
+        if (error != null) {
+            model.addAttribute("error", MessageConstants.INVALID_USERNAME_OR_PASSWORD);
+            setAttributeFromCookies(request, "email", "email", model);
+        }
+        return "login";
     }
 
     public void setAttributeFromCookies(HttpServletRequest request, String parameter, String attribute, Model model) {
         Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
-            for(Cookie cookie : cookies) {
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
                 setAttributesValueWithCookiesValue(cookie, parameter, attribute, model);
             }
         }

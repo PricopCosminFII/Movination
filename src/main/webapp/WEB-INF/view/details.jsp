@@ -24,7 +24,7 @@
                     <c:choose>
                         <c:when test="${movieDetails.rating!=null&&movieDetails.rating>0}">
                             <p> Movie rating: ${movieDetails.rating} <i class='fa-solid fa-star'
-                                                                         style='color: #f3da35'></i>
+                                                                        style='color: #f3da35'></i>
                             </p>
                         </c:when>
                         <c:otherwise>
@@ -34,7 +34,7 @@
                     </c:choose>
                     <p>Year: ${movieDetails.year}</p>
                     <p>Runtime: ${movieDetails.minutes} min </p>
-                    <p> <c:forEach items="${moviecategory}" var="category" varStatus="status">
+                    <p><c:forEach items="${moviecategory}" var="category" varStatus="status">
                         <c:choose>
                             <c:when test="${status.count < fn:length(moviecategory)}">
                                 ${category.name} /
@@ -65,19 +65,19 @@
         </c:if>
     </div>
     <div class="hero-section animate__animated animate__slideInLeft">
-    <c:forEach items="${moviesRecommendation}" var="movie" varStatus="status">
-        <c:if test="${status.count <= 3 && fn:length(moviesRecommendation) >=status.count}">
-        <div class="card-grid col mx-2">
-            <div class="card-movie">
-                <div class="card__background" style="background-image: url(${movie.picture})"></div>
-                <div class="card__content">
-                    <h3 class="card__heading">${movie.name}</h3>
-                    <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
+        <c:forEach items="${moviesRecommendation}" var="movie" varStatus="status">
+            <c:if test="${status.count <= 3 && fn:length(moviesRecommendation) >=status.count}">
+                <div class="card-grid col mx-2">
+                    <div class="card-movie">
+                        <div class="card__background" style="background-image: url(${movie.picture})"></div>
+                        <div class="card__content">
+                            <h3 class="card__heading">${movie.name}</h3>
+                            <button class="details-btn" type="submit" value="${movie.id}">See more details</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </c:if>
-    </c:forEach>
+            </c:if>
+        </c:forEach>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -2,21 +2,18 @@ package com.movie.controller;
 
 import com.movie.constants.MessageConstants;
 import com.movie.dto.CategoryDTO;
+import com.movie.dto.CategoryDTOWrapper;
 import com.movie.dto.MovieDTO;
-import com.movie.exception.ObjectNotFound;
+import com.movie.exception.*;
 import com.movie.facade.CategoryFacade;
 import com.movie.facade.MovieFacade;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -61,7 +58,31 @@ public class AdminController {
         } catch (ObjectNotFound e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-         return ResponseEntity.status(HttpStatus.OK).body(MessageConstants.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(MessageConstants.SUCCESS);
     }
 
+    @PostMapping(value = "/updateMovie", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity<String> update(@RequestBody MovieDTO movie) {
+        try {
+            movieFacade.update(movie.getId(), movie.getName(), movie.getDescription(), movie.getMinutes(), movie.getPicture(), movie.getYear());
+            return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"success\"}");
+        } catch (InvalidData | ObjectNotFound | ObjectNull e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @PostMapping(value = "/addCategoriesToMovie", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity<String> update(@RequestParam Long id, @RequestBody CategoryDTOWrapper chosenCategories) {
+        try {
+            MovieDTO movieDTO = movieFacade.getById(id);
+            List<CategoryDTO> categoryDTOS = movieFacade.setCategoriesToMovie(chosenCategories.getChosenCategories());
+            movieFacade.deleteCategories(movieDTO, categoryDTOS);
+            movieFacade.addCategoriesToMovie(movieDTO, categoryDTOS);
+            return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"success\"}");
+        } catch (ObjectNull | RequiredFieldNull | ObjectAlreadyExists | ObjectNotFound e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"" + e.getMessage());
+        }
+    }
 }

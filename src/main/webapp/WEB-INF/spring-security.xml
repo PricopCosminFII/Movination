@@ -1,6 +1,6 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
 
              xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,21 +11,23 @@
     <http auto-config="true">
         <intercept-url pattern="/movie" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/updateMovie" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/addCategoriesToMovie" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/register" access="isAnonymous()"/>
         <intercept-url pattern="/watchlist" access="isAuthenticated()"/>
-        <intercept-url pattern="/login" access="isAnonymous()" />
+        <intercept-url pattern="/login" access="isAnonymous()"/>
         <form-login login-page="/login" default-target-url="/"
                     username-parameter="email"
                     password-parameter="password"
-                    authentication-failure-url="/login?error" />
-        <logout logout-success-url="/" logout-url="/j_spring_security_logout" />
-        <csrf disabled="true" />
+                    authentication-failure-url="/login?error"/>
+        <logout logout-success-url="/" logout-url="/j_spring_security_logout"/>
+        <csrf disabled="true"/>
         <access-denied-handler ref="accessDeniedHandler"/>
     </http>
 
 
     <beans:bean id="bCryptPasswordEncoder"
-          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </beans:bean>
     <beans:bean id="accessDeniedHandler"
                 class="com.movie.handler.CustomAccessDeniedHandler">
@@ -34,7 +36,7 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="securityUserDetailsService">
-            <password-encoder ref="bCryptPasswordEncoder" />
+            <password-encoder ref="bCryptPasswordEncoder"/>
         </authentication-provider>
     </authentication-manager>
 

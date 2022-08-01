@@ -36,23 +36,23 @@
     </c:if>
 
     <c:if test="${movies != null}">
-    <div class="pagination">
-        <li class="page-item previous-page">
-            <a href="javascript:void(0)" class="page-link" aria-label="Previous">
-                <span aria-hidden="true">&#171;</span>
-            </a>
-        </li>
-        <li class="page-item current-page"><a class="page-link" href="#">1</a></li>
-        <li class="page-item dots"><a class="page-link" href="#">...</a></li>
-        <li class="page-item current-page"><a class="page-link" href="#">5</a></li>
-        <li class="page-item current-page"><a class="page-link" href="#">6</a></li>
-        <li class="page-item dots"><a class="page-link" href="#">...</a></li>
-        <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
-        <li class="page-item next-page">
-            <a href="javascript:void(0)" class="page-link" aria-label="Next">
-                <span aria-hidden="true">&#187;</span>
-            </a>
-        </li>
-    </div>
+        <div class="pagination">
+            <li class="page-item previous-page">
+                <a href="javascript:void(0)" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&#171;</span>
+                </a>
+            </li>
+            <li class="page-item current-page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+            <li class="page-item current-page"><a class="page-link" href="#">5</a></li>
+            <li class="page-item current-page"><a class="page-link" href="#">6</a></li>
+            <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+            <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
+            <li class="page-item next-page">
+                <a href="javascript:void(0)" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&#187;</span>
+                </a>
+            </li>
+        </div>
     </c:if>
 </div>
