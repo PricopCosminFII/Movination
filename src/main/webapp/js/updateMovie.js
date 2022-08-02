@@ -10,6 +10,9 @@ function submitFormData(form) {
     return json;
 }
 
+$(document).on('click', '.page-item', function () {
+    localStorage.setItem("selectedPage", $('.selected-page').attr('data-page'));
+});
 
 $(document).on('submit', '.updateMovieForm', function (event) {
     event.preventDefault();
@@ -36,6 +39,8 @@ $(document).on('submit', '.updateMovieForm', function (event) {
 })
 
 $(document).ready(function () {
+    selectedPage = localStorage.getItem("selectedPage");
+    $('a[data-page=\"' + selectedPage + '\"]').addClass('selected-page').trigger('click');
     let updatedMovie = localStorage.getItem("updatedMovie");
     let error = localStorage.getItem("error");
     if (updatedMovie) {
@@ -56,6 +61,7 @@ $(document).ready(function () {
             localStorage.removeItem("updatedMovie");
         }
         localStorage.removeItem("error");
+        localStorage.removeItem("selectedPage");
     }
 });
 
