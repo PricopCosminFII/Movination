@@ -15,6 +15,8 @@ import com.movie.repository.WatchlistItemDAO;
 import com.movie.service.WatchlistItemService;
 import lombok.Setter;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,13 +94,15 @@ public class WatchlistItemServiceImpl implements WatchlistItemService {
         if (movie == null) throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND);
         WatchlistItem watchlistItem = getItemWithMovieFromWatchlist(watchlist, movie);
         if (watchlistItem == null) throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND_IN_WATCHLIST);
-        Double ratingMovie = movie.getRating();
         Double ratingUser = watchlistItem.getUserRating();
-        if (!isHavingRatingsFromOthers(watchlist, movie)) movie.setRating(rating);
+        if (!isHavingRatingsFromOthers(watchlist, movie)) movie.setRating(getFormattedDouble(rating));
         else {
-            if (ratingUser == null) movie.setRating((ratingMovie + rating) / 2.0);
+            ArrayList<Double> utilsForAverage = getUtilsForAverage(movie);
+            Double sum = utilsForAverage.get(0);
+            Double numberOfRatings = utilsForAverage.get(1);
+            if (ratingUser == null) movie.setRating(getFormattedDouble((sum + rating) / (numberOfRatings + 1.0)));
             else {
-                movie.setRating((2.0 * ratingMovie - ratingUser + rating) / 2.0);
+                movie.setRating(getFormattedDouble((sum - ratingUser + rating) / numberOfRatings));
             }
         }
         watchlistItem.setUserRating(rating);
@@ -116,8 +120,12 @@ public class WatchlistItemServiceImpl implements WatchlistItemService {
         WatchlistItem watchlistItem = getItemWithMovieFromWatchlist(watchlist, movie);
         if (watchlistItem == null) throw new ObjectNotFound(MessageConstants.MOVIE_NOT_FOUND_IN_WATCHLIST);
         if (!isHavingRatingsFromOthers(watchlist, movie)) movie.setRating(null);
-        else if (watchlistItem.getUserRating() != null)
-            movie.setRating(2.0 * movie.getRating() - watchlistItem.getUserRating());
+        else if (watchlistItem.getUserRating() != null) {
+            ArrayList<Double> utilsForAverage = getUtilsForAverage(movie);
+            Double sum = utilsForAverage.get(0);
+            Double numberOfRatings = utilsForAverage.get(1);
+            movie.setRating(getFormattedDouble((sum - watchlistItem.getUserRating()) / (numberOfRatings - 1.0)));
+        }
         movie.setWatchlistItems(getCopyOfItemsWithRemovedItem(movie.getWatchlistItems(), watchlistItem));
         movieDAO.save(movie);
         watchlist.setWatchlistItems(getCopyOfItemsWithRemovedItem(watchlist.getWatchlistItems(), watchlistItem));
@@ -139,13 +147,41 @@ public class WatchlistItemServiceImpl implements WatchlistItemService {
 
     private boolean isHavingRatingsFromOthers(Watchlist watchlist, Movie movie) {
         List<Watchlist> allWatchlist = watchlistDAO.findAll();
-        if (allWatchlist != null && !allWatchlist.isEmpty()) {
+        if (!allWatchlist.isEmpty()) {
             for (Watchlist oneWatchlist : allWatchlist)
                 if (!oneWatchlist.equals(watchlist)) {
                     if (isRatedInWatchlist(movie, oneWatchlist)) return true;
                 }
         }
         return false;
+    }
+
+    private Double getFormattedDouble(Double number) {
+        DecimalFormat formatter = new DecimalFormat("0.00");
+        formatter.setRoundingMode(RoundingMode.DOWN);
+        return Double.parseDouble(formatter.format(number));
+    }
+
+    private ArrayList<Double> getUtilsForAverage(Movie movie) {
+        List<Watchlist> allWatchlist = watchlistDAO.findAll();
+        Double sum = 0.0;
+        Double numberOfRatings = 0.0;
+        ArrayList<Double> utilsForAverage = new ArrayList<>();
+        if (!allWatchlist.isEmpty()) {
+            for (Watchlist watchlist : allWatchlist) {
+                List<WatchlistItem> itemsOfWatchlist = watchlist.getWatchlistItems();
+                if (itemsOfWatchlist != null && !itemsOfWatchlist.isEmpty()) {
+                    for (WatchlistItem watchlistItem : itemsOfWatchlist)
+                        if (watchlistItem.getMovie().equals(movie) && (watchlistItem.getUserRating() != null)) {
+                            sum += watchlistItem.getUserRating();
+                            numberOfRatings++;
+                        }
+                }
+            }
+        }
+        utilsForAverage.add(sum);
+        utilsForAverage.add(numberOfRatings);
+        return utilsForAverage;
     }
 
     private boolean isRatedInWatchlist(Movie movie, Watchlist watchlist) {

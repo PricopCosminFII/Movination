@@ -223,7 +223,7 @@
                             </button>
                             <br>
                             <br>
-                            <button type="button" class="btn btn-info addCategories" value="${movie.id}"
+                            <button type="button" class="btn btn-info addCategories btn-admin" value="${movie.id}"
                                     data-bs-toggle="modal" data-bs-target="#modal${movie.id}">Add categories
                             </button>
                             <br>
