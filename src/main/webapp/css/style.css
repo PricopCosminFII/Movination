@@ -253,7 +253,7 @@ button.btn-outline-success.searchbtn {
 
 .card__heading {
     color: var(--text-lighter);
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
     line-height: 1.4;
     min-height: 145px;
