@@ -7,4 +7,4 @@ Each of the pages with multiple elements has a pagination (See homepage and admi
 
 Main technologies: 
 * Backend => Java, Spring MVC, Spring Security 
-* Frontend => JSP files, HTML, CSS, JavaScript, Bootstrap v5.0, JQuery
+* Frontend => JSP files, HTML, CSS, JavaScript, Bootstrap v5.0, jQuery
