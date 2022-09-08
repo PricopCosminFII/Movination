@@ -6,5 +6,5 @@ We also designed an admin page where you can add a movie, modify an existing mov
 Each of the pages with multiple elements has a pagination (See homepage and admin page, respectively.)
 
 Main technologies: 
-Backend => Java, Spring MVC, Spring Security 
-Frontend => JSP files, Bootstrap, JavaScript, JQuery
+* Backend => Java, Spring MVC, Spring Security 
+* Frontend => JSP files, Bootstrap, JavaScript, JQuery
