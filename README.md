@@ -9,8 +9,9 @@ Main technologies:
 * Backend => Java, Spring MVC, Spring Security, Spring Data JPA, Spring Core. 
 * Frontend => JSP files, HTML, CSS, JavaScript, Bootstrap v5.0, jQuery
 
-Project Management Methodology:
-* Agile => Tools: Jira Board
+Project Management:
+* Methodology => Agile;
+* Tools => Jira, Gitlab.
 
 Team members:
 * Cristian-Andrei Bereanu 
